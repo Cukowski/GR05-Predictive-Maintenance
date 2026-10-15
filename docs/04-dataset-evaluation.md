@@ -1,5 +1,7 @@
 # N-CMAPSS Dataset Proposal — For Professor Review
 
+> **Historical proposal:** The lecturer has since approved the topic and dataset. The proposal below is retained as context; its questions reflect the proposal stage. See the current [Business Case Report](02-business-case.md) and [Data Inventory & Access Report](03-data-inventory-access.md) for Task 2 progress. Data access and feasibility remain unverified.
+
 **GR05 · Manufacturing / Maintenance · 15 October 2026**  
 **Students:** Selçuk Ata Aksoy and Denzel Gregory Pragassa
 

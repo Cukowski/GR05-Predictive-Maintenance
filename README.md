@@ -1,33 +1,76 @@
-# GR05 — Predictive Maintenance: Aircraft Engine Remaining Useful Life
+# GR05 — Predictive Maintenance
 
-Industrial Analytics · WS 2026/27 · Manufacturing / Maintenance
+Estimating aircraft engine **Remaining Useful Life (RUL), in flight cycles**, using NASA N-CMAPSS data and Python machine learning.
 
-**Team:** Selçuk Ata Aksoy and Denzel Gregory Pragassa  
-**Lecturer:** Prof. Dr. Monika Frey-Luxemburger  
-**Status:** N-CMAPSS dataset proposal lecturer confirmed. (Kaggle Dataset: https://www.kaggle.com/datasets/bishals098/nasa-cmapss-2-engine-degradation)
+**Course:** Industrial Analytics · Hochschule Furtwangen University · WS 2026/27\
+**Domain:** Manufacturing / Maintenance\
+**Team:** Selçuk Ata Aksoy and Denzel Gregory Pragassa\
+**Lecturer:** Prof. Dr. Monika Frey-Luxemburger
 
-## Problem
-Unexpected equipment degradation can cause interruptions and maintenance costs. The project investigates whether sensor and operating data can estimate remaining useful life (RUL) to support maintenance planning.
+## Current status
 
-## Research question
+The lecturer has approved the topic and dataset. Task 1 (Project Definition) is documented; Task 2 (Business Case and Dataset) is in progress. The Business Case Report and Data Inventory & Access Report are drafts awaiting team review.
+
+This repository currently contains project documentation. Dataset files, Python dependencies, notebooks, EDA, and model experiments have not yet been added. The Kaggle package structure, access conditions, and resource requirements remain to be verified. No experimental results or maintenance savings have been demonstrated.
+
+## Problem and research question
+
+Unexpected equipment degradation can interrupt operations and increase maintenance costs. RUL estimates may help maintenance planners balance early intervention against continued operation.
+
 **How accurately can machine-learning regression models estimate the remaining useful life of simulated aircraft engines using N-CMAPSS sensor and operational data, compared with a simple baseline?**
 
+The project is an offline academic demonstration. Operational aviation use and measured financial benefits are outside its scope.
+
 ## Dataset
-- N-CMAPSS, introduced by Arias Chao et al. (2021), *Aircraft Engine Run-to-Failure Dataset under Real Flight Conditions for Prognostics and Diagnostics*: https://www.mdpi.com/2306-5729/6/1/5
-- NASA PCoE repository, Turbofan Engine Degradation Simulation Data Set 2: https://www.nasa.gov/intelligent-systems-division/discovery-and-systems-health/pcoe/pcoe-data-set-repository/
-- Kaggle Dataset: https://www.kaggle.com/datasets/bishals098/nasa-cmapss-2-engine-degradation
-- Operating conditions are derived from real flight profiles; engine deterioration and sensor responses are simulated, **not records of real engine failures**.
-- Proposed starting point: a feasible DS01 pilot, subject to verifying dataset files, licensing, and resource needs.
 
-## Method
-CRISP-DM: business understanding, data understanding, preparation, modeling, evaluation and business implications. Start with a simple RUL baseline, then compare regression models such as linear regression and random forest. Evaluate MAE/RMSE in remaining flight cycles, using held-out engines where feasible and documenting potential leakage.
+- **Scientific source:** Arias Chao et al. (2021), [Aircraft Engine Run-to-Failure Dataset under Real Flight Conditions for Prognostics and Diagnostics](https://doi.org/10.3390/data6010005).
+- **Original provider:** [NASA Prognostics Center of Excellence](https://www.nasa.gov/intelligent-systems-division/discovery-and-systems-health/pcoe/pcoe-data-set-repository/), “Turbofan Engine Degradation Simulation Data Set 2.”
+- **Planned download source:** [Kaggle N-CMAPSS redistribution](https://www.kaggle.com/datasets/bishals098/nasa-cmapss-2-engine-degradation).
+- **Initial scope:** a DS01 pilot, subject to checking the actual files, licensing, and local memory/storage requirements.
 
-## Deliverables
-Project proposal and data evaluation; initial descriptive analysis; reproducible Python notebooks and model comparison; limitations and illustrative maintenance implications; milestone (19 Nov 2026) and final presentation (21 Jan 2027).
+Operating conditions come from real flight profiles; engine degradation and sensor responses are **simulated**, rather than observations of real engine failures. Paper-described properties must be distinguished from properties verified in the downloaded files. See the [Data Inventory & Access Report](docs/03-data-inventory-access.md).
 
-## Documentation
-- [Project definition](docs/01-project-definition.md)
-- [Dataset proposal](docs/04-dataset-evaluation.md)
-- [Google Sheet roadmap](https://docs.google.com/spreadsheets/d/17AP7LQW_lRiLAHCcqhy8QmZdgw_bXJETPD5y3_tOEiU/edit)
+## Approach
 
-Do not commit large raw datasets. Check HFU rules for AI-assisted academic work: https://www.hs-furtwangen.de/en/hfu-insights/studying-at-hfu/academic-work-including-with-ai-tools
+Follow **CRISP-DM**: business understanding → data understanding → preparation → modeling → evaluation → business implications.
+
+1. Verify the dataset source, schema, engine IDs, flight cycles, RUL labels, and provided development/test partitions.
+2. Explore a small DS01 sample before loading larger arrays; document missing values, operating conditions, and sensor/RUL trajectories by engine.
+3. Define when predictions are made and separate engines across training, validation, and testing. Respect provided partitions and fit preprocessing on training data only.
+4. Establish a simple baseline, then compare manageable regression models such as linear regression and random forest. Exclude future information, target labels, and unjustified simulator-only features from predictors.
+5. Report **MAE and RMSE in flight cycles**, including per-engine errors and RUL overestimation. Discuss maintenance implications using clearly labeled hypothetical scenarios.
+
+**Planned tools:** Python, pandas, NumPy, Matplotlib, scikit-learn, Jupyter, and an HDF5 reader such as h5py if the downloaded format requires it. Record dependencies and setup instructions when the first inspection workflow is implemented.
+
+## Repository guide
+
+| Path | Purpose / status |
+|---|---|
+| [docs/01-project-definition.md](docs/01-project-definition.md) | Task 1: research question, objectives, and scope |
+| [docs/02-business-case.md](docs/02-business-case.md) | Task 2: Business Case Report — draft |
+| [docs/03-data-inventory-access.md](docs/03-data-inventory-access.md) | Task 2: Data Inventory & Access Report — draft; file verification pending |
+| [docs/04-dataset-evaluation.md](docs/04-dataset-evaluation.md) | Original dataset proposal, retained as historical context |
+| [docs/ai-use-log.md](docs/ai-use-log.md) | AI assistance, verification, and human review record |
+| [.gitignore](.gitignore) | Excludes local data, secrets, environments, and generated caches |
+
+Document numbers indicate reading order, not course task numbers. Add `notebooks/` for exploratory work and `src/` for reusable code when implementation starts. Keep local raw and processed datasets under `data/raw/` and `data/processed/`; both paths are ignored by Git. Commit small, reviewed summaries and figures with their generation steps.
+
+## Next steps and milestones
+
+1. Review both Task 2 drafts together; confirm the prediction point, baseline, and illustrative business scenario.
+2. Obtain DS01 and record its source/version, license, filenames, sizes, and available hardware in the inventory report.
+3. Implement reproducible schema inspection and a small initial EDA notebook. Confirm feasibility before expanding the scope.
+
+| Date | Planned milestone |
+|---|---|
+| 22 October 2026 | Pilot feasibility and research scope decision |
+| 19 November 2026 | Business case, dataset, and initial descriptive analysis presentation |
+| 21 January 2027 | Final modeling, evaluation, business discussion, and presentation |
+
+Planning: [Google Sheet roadmap](https://docs.google.com/spreadsheets/d/17AP7LQW_lRiLAHCcqhy8QmZdgw_bXJETPD5y3_tOEiU/edit).
+
+## Working practices and AI disclosure
+
+Keep changes small and commits meaningful. Do not commit raw datasets, credentials, local environments, or notebook checkpoints. Verify scientific claims and references, distinguish planned work from measured results, and retain enough information to reproduce analyses.
+
+Follow [HFU guidance on academic work with AI tools](https://www.hs-furtwangen.de/en/hfu-insights/studying-at-hfu/academic-work-including-with-ai-tools): clarify permitted use and the declaration format with the lecturer. Record assistance and human verification in the [AI use log](docs/ai-use-log.md), and retain conversation exports or links for traceability.

@@ -4,7 +4,7 @@
 **Group:** GR05, Manufacturing / Maintenance  
 **Team:** Selçuk Ata Aksoy and Denzel Gregory Pragassa  
 **Supervisor:** Prof. Dr. Monika Frey-Luxemburger  
-**Status:** Proposed N-CMAPSS dataset; lecturer signoff and feasibility pending.
+**Status:** Topic and N-CMAPSS dataset approved by the lecturer; data access verification and pilot feasibility pending.
 
 ## One-sentence problem
 Unexpected deterioration of industrial machinery can lead to unplanned downtime and additional maintenance costs, and sensor-based estimates of remaining useful life may support earlier maintenance planning.
