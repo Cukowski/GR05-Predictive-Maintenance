@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="GR05: a student research project exploring aircraft engine remaining useful life with NASA N-CMAPSS and machine learning at Hochschule Furtwangen University.">
+  <meta name="theme-color" content="#eeede7">
+  <title>GR05 — Predictive Maintenance</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/site.css">
+  <script src="assets/site.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header wrap">
+    <a class="wordmark" href="./" aria-label="GR05 home"><span class="brand-icon" aria-hidden="true">✳</span> GR05<span class="wordmark-detail"> / INDUSTRIAL ANALYTICS</span></a>
+    <nav aria-label="Main navigation">
+      <a href="#project">The project</a>
+      <a href="#findings">Findings</a>
+      <a class="repo-link" href="https://github.com/Cukowski/GR05-Predictive-Maintenance">GitHub <span aria-hidden="true">↗</span></a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero wrap" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="status-dot" aria-hidden="true"></span> STUDENT RESEARCH · WS 2026/27</p>
+        <h1 id="hero-title">Every cycle<br>tells a <em>story.</em></h1>
+        <p class="hero-description">Listening to engine data.<br>Learning to predict what comes next.</p>
+        <p class="hero-context">We’re exploring how machine learning can estimate an aircraft engine’s remaining useful life, one flight cycle at a time.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#project">Explore the project <span aria-hidden="true">↘</span></a>
+          <a class="text-link" href="https://github.com/Cukowski/GR05-Predictive-Maintenance">View repository <span aria-hidden="true">↗</span></a>
+        </div>
+        <p class="hero-footnote">HOCHSCHULE FURTWANGEN UNIVERSITY<br>MANUFACTURING / MAINTENANCE</p>
+      </div>
+
+      <figure class="engine-panel">
+        <div class="panel-top"><span><span class="status-dot" aria-hidden="true"></span> ENGINE STUDY / 001</span><span>N-CMAPSS</span></div>
+        <div class="engine-stage">
+          <div class="crosshair crosshair-top" aria-hidden="true"></div>
+          <div class="crosshair crosshair-bottom" aria-hidden="true"></div>
+          <span class="side-label" aria-hidden="true">FRONT VIEW — FAN ASSEMBLY</span>
+          <svg class="engine" viewBox="0 0 600 600" role="img" aria-labelledby="engine-title engine-description">
+            <title id="engine-title">Rotating turbofan illustration</title>
+            <desc id="engine-description">A stylized front view of a jet engine fan. The rotation is decorative and does not represent dataset measurements.</desc>
+            <defs>
+              <radialGradient id="housing"><stop offset="0.68" stop-color="#111616"/><stop offset="0.81" stop-color="#424b4b"/><stop offset="0.85" stop-color="#89908a"/><stop offset="0.88" stop-color="#242c2c"/><stop offset="0.96" stop-color="#656e69"/><stop offset="1" stop-color="#171d1d"/></radialGradient>
+              <linearGradient id="blade-metal" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#283233"/><stop offset="0.36" stop-color="#9ba9a3"/><stop offset="0.57" stop-color="#d0d6c9"/><stop offset="0.64" stop-color="#5d716e"/><stop offset="1" stop-color="#152121"/></linearGradient>
+              <radialGradient id="spinner" cx="35%" cy="28%" r="75%"><stop stop-color="#b0b9ae"/><stop offset="0.35" stop-color="#5e7068"/><stop offset="0.75" stop-color="#26332e"/><stop offset="1" stop-color="#101b18"/></radialGradient>
+              <path id="blade" d="M 279 235 C 247 199 205 135 218 79 C 243 69 266 67 281 68 C 254 126 295 172 312 225 Z"/>
+            </defs>
+            <circle cx="300" cy="300" r="287" fill="none" stroke="#37413c" stroke-width="1" stroke-dasharray="2 9"/>
+            <circle cx="300" cy="300" r="269" fill="url(#housing)" stroke="#818c80" stroke-width="1"/>
+            <circle cx="300" cy="300" r="236" fill="#0b1313" stroke="#8b9891" stroke-width="2"/>
+            <g class="rotor" fill="url(#blade-metal)" stroke="#1b2826" stroke-width="0.8">
+              <!-- Fan blades are repeated around the shaft; no dataset values are used. -->
+              <use href="#blade" transform="rotate(0 300 300)"/>
+              <use href="#blade" transform="rotate(15 300 300)"/>
+              <use href="#blade" transform="rotate(30 300 300)"/>
+              <use href="#blade" transform="rotate(45 300 300)"/>
+              <use href="#blade" transform="rotate(60 300 300)"/>
+              <use href="#blade" transform="rotate(75 300 300)"/>
+              <use href="#blade" transform="rotate(90 300 300)"/>
+              <use href="#blade" transform="rotate(105 300 300)"/>
+              <use href="#blade" transform="rotate(120 300 300)"/>
+              <use href="#blade" transform="rotate(135 300 300)"/>
+              <use href="#blade" transform="rotate(150 300 300)"/>
+              <use href="#blade" transform="rotate(165 300 300)"/>
+              <use href="#blade" transform="rotate(180 300 300)"/>
+              <use href="#blade" transform="rotate(195 300 300)"/>
+              <use href="#blade" transform="rotate(210 300 300)"/>
+              <use href="#blade" transform="rotate(225 300 300)"/>
+              <use href="#blade" transform="rotate(240 300 300)"/>
+              <use href="#blade" transform="rotate(255 300 300)"/>
+              <use href="#blade" transform="rotate(270 300 300)"/>
+              <use href="#blade" transform="rotate(285 300 300)"/>
+              <use href="#blade" transform="rotate(300 300 300)"/>
+              <use href="#blade" transform="rotate(315 300 300)"/>
+              <use href="#blade" transform="rotate(330 300 300)"/>
+              <use href="#blade" transform="rotate(345 300 300)"/>
+              <circle cx="300" cy="300" r="77" fill="#13201c" stroke="#87988c" stroke-width="1"/>
+              <circle cx="300" cy="300" r="68" fill="url(#spinner)"/>
+              <path d="M 300 300 C 276 274 316 254 331 277 C 355 313 303 341 278 315" fill="none" stroke="#c6d1bc" stroke-width="4" stroke-linecap="round" opacity="0.8"/>
+            </g>
+            <path d="M 300 13 L 300 29 M 300 571 L 300 587 M 13 300 L 29 300 M 571 300 L 587 300" stroke="#f56b3a" stroke-width="2"/>
+          </svg>
+          <span class="engine-axis" aria-hidden="true">AXIS / 01</span>
+        </div>
+        <figcaption class="panel-bottom"><span>ILLUSTRATION · NOT LIVE TELEMETRY</span><button class="motion-toggle" type="button" hidden aria-pressed="false">Pause rotation <span aria-hidden="true">Ⅱ</span></button></figcaption>
+      </figure>
+    </section>
+
+    <div class="spec-strip">
+      <dl class="wrap spec-grid">
+        <div><dt>DATA SOURCE</dt><dd>NASA N-CMAPSS</dd></div>
+        <div><dt>PREDICTION TARGET</dt><dd>Remaining flight cycles</dd></div>
+        <div><dt>METHOD</dt><dd>CRISP-DM + regression</dd></div>
+        <div><dt>CURRENT PHASE</dt><dd><span class="status-dot orange" aria-hidden="true"></span> Business & data understanding</dd></div>
+      </dl>
+    </div>
+
+    <section id="project" class="section wrap project-section" aria-labelledby="project-title">
+      <div class="section-label"><span>01 / THE QUESTION</span><span>FROM SIGNALS TO DECISIONS</span></div>
+      <div class="project-grid">
+        <h2 id="project-title">How much life<br>is left?</h2>
+        <div class="project-copy">
+          <p class="lead">Can sensor and operating data help us estimate when an engine will reach the end of its useful life?</p>
+          <p>Our goal is to compare simple baseline predictions with classical regression models using NASA’s N-CMAPSS aircraft engine degradation dataset. We’ll measure prediction error in flight cycles and explore what it could mean for maintenance planning.</p>
+          <p class="source-note">Real flight operating profiles. <strong>Simulated engine degradation.</strong> An academic study, with no operational aviation validation.</p>
+          <a class="text-link" href="https://doi.org/10.3390/data6010005">Read the dataset paper <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section id="progress" class="progress-section" aria-labelledby="progress-title">
+      <div class="wrap section">
+        <div class="section-label"><span>02 / FLIGHT PLAN</span><span>STEP BY STEP</span></div>
+        <div class="section-heading"><h2 id="progress-title">Before the predictions,<br>the groundwork.</h2><p>Topic and dataset approved.<br>Now building the business case and verifying the data.</p></div>
+        <ol class="flight-plan">
+          <li class="complete"><span class="step-state">01 / DOCUMENTED</span><h3>Define the problem</h3><p>Research question, project scope, and topic approval.</p><a href="https://github.com/Cukowski/GR05-Predictive-Maintenance/blob/main/docs/01-project-definition.md">Project definition <span aria-hidden="true">↗</span></a></li>
+          <li class="current"><span class="step-state">02 / IN PROGRESS</span><h3>Understand the data</h3><p>Business case and data inventory drafts. DS01 inspection is next.</p><a href="https://github.com/Cukowski/GR05-Predictive-Maintenance/blob/main/docs/03-data-inventory-access.md">Data inventory <span aria-hidden="true">↗</span></a></li>
+          <li><span class="step-state">03 / PLANNED</span><h3>Explore & model</h3><p>Inspect sensor trajectories, establish a baseline, and compare regressors.</p></li>
+          <li><span class="step-state">04 / PLANNED</span><h3>Evaluate & explain</h3><p>Test on held-out engines and discuss errors, limitations, and implications.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="findings" class="section wrap" aria-labelledby="findings-title">
+      <div class="section-label"><span>03 / RESEARCH NOTES</span><span>ROOM FOR WHAT WE LEARN</span></div>
+      <div class="section-heading"><h2 id="findings-title">Evidence comes next.</h2><p>No experiments have been run yet.<br>Verified results will appear here as the project develops.</p></div>
+      <div class="findings-grid">
+        <article><span class="finding-number">A</span><h3>Dataset exploration</h3><p>Engine histories, sensor behavior, and data quality findings from the planned DS01 pilot.</p><span class="pending-label">Awaiting data inspection</span></article>
+        <article><span class="finding-number">B</span><h3>Model comparison</h3><p>Baseline and regression MAE / RMSE in flight cycles, with the evaluation setup alongside.</p><span class="pending-label">Awaiting experiments</span></article>
+        <article><span class="finding-number">C</span><h3>Maintenance insights</h3><p>What prediction errors might mean for planning, with hypothetical scenarios clearly identified.</p><span class="pending-label">Awaiting evaluation</span></article>
+      </div>
+    </section>
+
+    <section class="team-section wrap" aria-labelledby="team-title">
+      <div><p class="eyebrow">THE TEAM / GR05</p><h2 id="team-title">Two students.<br>One engine question.</h2></div>
+      <div class="team-copy"><p class="team-names">Selçuk Ata Aksoy<br>Denzel Gregory Pragassa</p><p>Industrial Analytics · WS 2026/27<br>Hochschule Furtwangen University</p><p>Supervised by Prof. Dr. Monika Frey-Luxemburger</p><a class="text-link" href="https://github.com/Cukowski/GR05-Predictive-Maintenance/blob/main/docs/ai-use-log.md">AI assistance & transparency <span aria-hidden="true">↗</span></a></div>
+    </section>
+  </main>
+
+  <footer class="wrap site-footer"><a class="wordmark" href="./">GR05 <span class="wordmark-detail">/ PREDICTIVE MAINTENANCE</span></a><p>Project status: 15 October 2026</p><a href="https://github.com/Cukowski/GR05-Predictive-Maintenance">Follow the research <span aria-hidden="true">↗</span></a></footer>
+</body>
+</html>

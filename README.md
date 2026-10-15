@@ -52,6 +52,7 @@ Follow **CRISP-DM**: business understanding → data understanding → preparati
 | [docs/04-dataset-evaluation.md](docs/04-dataset-evaluation.md) | Original dataset proposal, retained as historical context |
 | [docs/ai-use-log.md](docs/ai-use-log.md) | AI assistance, verification, and human review record |
 | [.gitignore](.gitignore) | Excludes local data, secrets, environments, and generated caches |
+| [index.html](index.html), `assets/` | Static project landing page with a decorative turbine and space for future findings |
 
 Document numbers indicate reading order, not course task numbers. Add `notebooks/` for exploratory work and `src/` for reusable code when implementation starts. Keep local raw and processed datasets under `data/raw/` and `data/processed/`; both paths are ignored by Git. Commit small, reviewed summaries and figures with their generation steps.
 
@@ -62,6 +63,8 @@ The following layout is a roadmap. Create planned files and folders when there i
 ```text
 GR05-Predictive-Maintenance/
 ├── README.md
+├── index.html                       # GitHub Pages landing page
+├── assets/                          # Page styles, script, and favicon
 ├── requirements.txt                 # Add with the first working notebook
 ├── .gitignore
 ├── docs/
@@ -94,6 +97,14 @@ GR05-Predictive-Maintenance/
     └── final/
 ```
 
+## Project website
+
+The [landing page](index.html) introduces the project and its current progress. The turbine is a decorative SVG illustration, not a visualization of dataset measurements. Findings remain marked as pending until experiments are documented. The site uses plain HTML, CSS, and JavaScript with no external libraries, fonts, analytics, or build step. Motion can be paused and follows the visitor's reduced-motion preference; all project content remains available without JavaScript.
+
+Open `index.html` in a browser for a local preview. After reviewing and pushing, enable GitHub Pages under **Settings → Pages → Build and deployment → Deploy from a branch**, selecting **main** and **/(root)**. See [GitHub's publishing-source instructions](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site). The expected address after successful deployment is `https://cukowski.github.io/GR05-Predictive-Maintenance/`. Hosting has not been configured or verified as part of this change.
+
+Update the status text, progress roadmap, and footer date in `index.html` as work advances. Replace the pending findings with reviewed figures and model comparisons only after recording their source experiments and evaluation protocol. Keep styles in `assets/site.css` and decorative behavior in `assets/site.js`.
+
 ## Next steps and milestones
 
 1. Review both Task 2 drafts together; confirm the prediction point, baseline, and illustrative business scenario.
@@ -112,4 +123,4 @@ Planning: [Google Sheet roadmap](https://docs.google.com/spreadsheets/d/17AP7LQW
 
 Keep changes small and commits meaningful. Do not commit raw datasets, credentials, local environments, or notebook checkpoints. Verify scientific claims and references, distinguish planned work from measured results, and retain enough information to reproduce analyses.
 
-Follow [HFU guidance on academic work with AI tools](https://www.hs-furtwangen.de/en/hfu-insights/studying-at-hfu/academic-work-including-with-ai-tools): clarify permitted use and the declaration format with the lecturer. Record assistance and human verification in the [AI use log](docs/ai-use-log.md), and retain conversation exports or links for traceability.
+Follow [HFU guidance on academic work with AI tools](https://www.hs-furtwangen.de/en/hfu-insights/studying-at-hfu/academic-work-including-with-ai-tools): clarify permitted use and the declaration format with the lecturer. Record assistance and human verification in the [AI use log](docs/ai-use-log.md), and keep supporting conversations where useful or required by the lecturer.
