@@ -1,57 +1,37 @@
 # GR05 — Project Definition
 
-**Course:** Industrial Analytics — WS 2026/27  
-**Group:** GR05 — Manufacturing  
-**Members:** Selçuk Ata Aksoy and Denzel Gregory Pragassa  
-**Supervisor:** Prof. Dr. Monika Frey-Luxemburger
+**Course:** Industrial Analytics (WS 2026/27)  
+**Group:** GR05, Manufacturing / Maintenance  
+**Team:** Selçuk Ata Aksoy and Denzel Gregory Pragassa  
+**Supervisor:** Prof. Dr. Monika Frey-Luxemburger  
+**Status:** Proposed N-CMAPSS dataset; lecturer signoff and feasibility pending.
 
-## 1. Project Title
+## One-sentence problem
+Unexpected deterioration of industrial machinery can lead to unplanned downtime and additional maintenance costs, and sensor-based estimates of remaining useful life may support earlier maintenance planning.
 
-Predictive Maintenance Using Industrial Sensor Data
+## Primary research question
+How accurately can classical machine-learning regression models estimate the remaining useful life (RUL) of simulated aircraft engines using N-CMAPSS operating and sensor data, relative to a simple baseline?
 
-## 2. Problem Statement
+**Target:** remaining flight cycles until simulated end-of-life. This is a regression problem, not binary failure detection.
 
-Unexpected equipment failures in manufacturing can cause production downtime, maintenance costs, and operational disruptions. This project investigates whether industrial sensor data can be used to identify abnormal equipment conditions and predict potential failures using machine-learning techniques.
+**Proposed success measures:** MAE and RMSE in flight cycles, evaluated on held-out engine units where supported by the dataset. No performance claim has yet been demonstrated.
 
-## 3. Research Question
+## Objectives
+1. Verify N-CMAPSS data availability, format and licensing and choose a manageable subset (DS01 is a candidate).
+2. Understand flight-cycle histories, engine identifiers, sensor variables and RUL labels.
+3. Prepare features and a leakage-resistant train/test design.
+4. Implement a transparent baseline and compare at least one regression model.
+5. Report RUL errors and qualitative limitations for maintenance decision support.
+6. Present reproducible experiments, citations and an illustrative business-impact scenario.
 
-How effectively can machine-learning models detect abnormal equipment conditions or predict equipment failures using industrial sensor data compared with a simple baseline approach?
+## Research boundaries
+The degradation processes and sensor measurements are simulated under operating conditions drawn from real flight profiles. Do not claim actual engine failures, operational validation, regulatory certification or guaranteed maintenance savings. Advanced deep learning and live deployment are out of initial scope.
 
-The exact prediction target and evaluation metrics will be finalized after selecting a suitable dataset.
+## Methodology
+CRISP-DM: business understanding → data understanding → preparation → modeling → evaluation → practical implications.
 
-## 4. Project Objectives
-
-- Identify and evaluate a suitable industrial maintenance dataset.
-- Explore sensor measurements and equipment operating conditions.
-- Clean and preprocess the dataset.
-- Develop a baseline detection or prediction method.
-- Implement and evaluate machine-learning models.
-- Compare results using appropriate performance metrics.
-- Discuss how the findings could support maintenance planning.
-
-## 5. Methodology
-
-The project will follow CRISP-DM:
-
-1. Business Understanding
-2. Data Understanding
-3. Data Preparation
-4. Modeling
-5. Evaluation
-6. Deployment / Business Application
-
-## 6. Expected Deliverables
-
-- Documented business case and research questions
-- Dataset evaluation and exploratory data analysis
-- Reproducible Python experiments
-- Baseline and machine-learning model comparison
-- Evaluation and interpretation of results
-- Business impact discussion
-- Milestone and final presentations
-
-## 7. Project Status
-
-**Status:** Initial definition — dataset selection pending.
-
-The project direction has been discussed with the lecturer. The final technical scope depends on dataset availability, data quality, and the information contained in the selected dataset.
+## Next decisions
+- [x] Confirm with lecturer that N-CMAPSS/RUL is acceptable in the Manufacturing group.
+- [ ] Download and audit a feasible subset and document provenance.
+- [ ] Verify the intended predictor and target columns and appropriate unit-based split.
+- [ ] Finalize research scope after feasibility assessment.
