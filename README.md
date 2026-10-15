@@ -55,6 +55,45 @@ Follow **CRISP-DM**: business understanding → data understanding → preparati
 
 Document numbers indicate reading order, not course task numbers. Add `notebooks/` for exploratory work and `src/` for reusable code when implementation starts. Keep local raw and processed datasets under `data/raw/` and `data/processed/`; both paths are ignored by Git. Commit small, reviewed summaries and figures with their generation steps.
 
+### Planned structure
+
+The following layout is a roadmap. Create planned files and folders when there is actual content; the repository guide above lists the current files. Research questions remain in `docs/01-project-definition.md`.
+
+```text
+GR05-Predictive-Maintenance/
+├── README.md
+├── requirements.txt                 # Add with the first working notebook
+├── .gitignore
+├── docs/
+│   ├── 01-project-definition.md
+│   ├── 02-business-case.md
+│   ├── 03-data-inventory-access.md
+│   ├── 04-dataset-evaluation.md
+│   ├── 05-methodology.md            # Planned
+│   ├── decisions.md                 # Planned
+│   ├── references.md                # Planned
+│   └── ai-use-log.md
+├── data/
+│   ├── README.md                    # Planned: download and storage instructions
+│   ├── raw/                         # Local only; ignored by Git
+│   └── processed/                   # Local only; ignored by Git
+├── notebooks/                       # Planned
+│   ├── 01-data-exploration.ipynb
+│   ├── 02-preprocessing.ipynb
+│   └── 03-modeling.ipynb
+├── src/                             # Planned: extract reusable notebook code
+│   ├── preprocessing.py
+│   ├── features.py
+│   ├── train.py
+│   └── evaluate.py
+├── reports/                         # Planned
+│   ├── figures/
+│   └── results/
+└── presentations/                   # Planned
+    ├── milestone/
+    └── final/
+```
+
 ## Next steps and milestones
 
 1. Review both Task 2 drafts together; confirm the prediction point, baseline, and illustrative business scenario.
