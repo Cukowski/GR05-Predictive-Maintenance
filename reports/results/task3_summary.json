@@ -1,0 +1,179 @@
+{
+  "analysis_date": "2026-10-22",
+  "files": [
+    {
+      "file": "N-CMAPSS_DS01-005.h5",
+      "bytes": 2873351432,
+      "sha256": "3abdcee2a3c8136e8880e5d43ac8cdf12ab9f7f3ab37145f23b24c11335afbed"
+    },
+    {
+      "file": "N-CMAPSS_DS02-006.h5",
+      "bytes": 2450472504,
+      "sha256": "47971a68b239ecb756833218a95d68ded6eb7e63ee84e86671c8b188de1ca765"
+    }
+  ],
+  "environment": {
+    "python": "3.12.3",
+    "numpy": "2.5.4",
+    "pandas": "3.0.6",
+    "h5py": "3.16.0",
+    "matplotlib": "3.11.2",
+    "jupyterlab": "4.6.4",
+    "nbclient": "0.11.0",
+    "nbformat": "5.11.1"
+  },
+  "configuration": {
+    "chunk_rows": 100000,
+    "sample_rows_per_partition": 12000,
+    "sampling": "deterministic evenly spaced by original row index"
+  },
+  "overview": [
+    {
+      "dataset": "DS01",
+      "partition": "dev",
+      "engines": 6,
+      "flights": 553,
+      "readings": 4906636,
+      "min_lifetime": 75,
+      "max_lifetime": 100
+    },
+    {
+      "dataset": "DS01",
+      "partition": "test",
+      "engines": 4,
+      "flights": 341,
+      "readings": 2735232,
+      "min_lifetime": 80,
+      "max_lifetime": 90
+    },
+    {
+      "dataset": "DS02",
+      "partition": "dev",
+      "engines": 6,
+      "flights": 446,
+      "readings": 5263447,
+      "min_lifetime": 63,
+      "max_lifetime": 89
+    },
+    {
+      "dataset": "DS02",
+      "partition": "test",
+      "engines": 3,
+      "flights": 202,
+      "readings": 1253743,
+      "min_lifetime": 59,
+      "max_lifetime": 76
+    }
+  ],
+  "checks": [
+    {
+      "dataset": "DS01",
+      "partition": "dev",
+      "rows": 4906636,
+      "aligned": true,
+      "invalid_categories": 0,
+      "invalid_indices": 0,
+      "within_unit_cycle_reversals": 0,
+      "adjacent_exact_duplicates": 0,
+      "diagnostic_sample_rows": 12000,
+      "sample_exact_duplicates": 0
+    },
+    {
+      "dataset": "DS01",
+      "partition": "test",
+      "rows": 2735232,
+      "aligned": true,
+      "invalid_categories": 0,
+      "invalid_indices": 0,
+      "within_unit_cycle_reversals": 0,
+      "adjacent_exact_duplicates": 0,
+      "diagnostic_sample_rows": 12000,
+      "sample_exact_duplicates": 0
+    },
+    {
+      "dataset": "DS02",
+      "partition": "dev",
+      "rows": 5263447,
+      "aligned": true,
+      "invalid_categories": 0,
+      "invalid_indices": 0,
+      "within_unit_cycle_reversals": 0,
+      "adjacent_exact_duplicates": 0,
+      "diagnostic_sample_rows": 12000,
+      "sample_exact_duplicates": 0
+    },
+    {
+      "dataset": "DS02",
+      "partition": "test",
+      "rows": 1253743,
+      "aligned": true,
+      "invalid_categories": 0,
+      "invalid_indices": 0,
+      "within_unit_cycle_reversals": 0,
+      "adjacent_exact_duplicates": 0,
+      "diagnostic_sample_rows": 12000,
+      "sample_exact_duplicates": 0
+    }
+  ],
+  "quality": [
+    {
+      "dimension": "Conformity",
+      "scope": "Full metadata + all auxiliary codes",
+      "finding": "Arrays aligned; invalid category codes: 0; invalid IDs/cycles: 0",
+      "limitation": "P2 definition/unit requires source confirmation; file metadata does not prove physical units."
+    },
+    {
+      "dimension": "Completeness",
+      "scope": "Every numeric cell in both files",
+      "finding": "NaN: 0; infinity: 0",
+      "limitation": "Sentinel values and gaps in physical time are not established by NaN checks."
+    },
+    {
+      "dimension": "Uniqueness",
+      "scope": "All adjacent rows + 12,000 evenly spaced rows per partition",
+      "finding": "Adjacent exact duplicates: 0; sampled exact duplicates: 0",
+      "limitation": "All non-adjacent duplicates were not exhaustively checked; repeated flight keys are valid."
+    },
+    {
+      "dimension": "Accuracy",
+      "scope": "Full ranges + development-sample IQR screens",
+      "finding": "49 dataset-variable pairs have sampled IQR flags; no rows removed",
+      "limitation": "Extreme values are not proven errors; no independent physical ground truth."
+    },
+    {
+      "dimension": "Timeliness",
+      "scope": "Provided sources and metadata",
+      "finding": "Static simulation data; no calendar timestamp column",
+      "limitation": "Download version/terms remain to be recorded; current operational relevance is unvalidated."
+    },
+    {
+      "dimension": "Consistency",
+      "scope": "All engine-flight aggregates + full auxiliary scan",
+      "finding": "Engine overlap: {'DS01': [], 'DS02': []}; cycle/label/health checks flagged: 0",
+      "limitation": "Both partitions were inspected for understanding; keep test data out of later tuning."
+    }
+  ],
+  "totals": {
+    "readings": 14159058,
+    "numeric_cells": 665475726,
+    "engines": 19,
+    "flights": 1542,
+    "missing": 0,
+    "infinite": 0,
+    "adjacent_exact_duplicates": 0,
+    "sample_exact_duplicates": 0,
+    "cycle_logic_flags": 0
+  },
+  "test_engine_overlap": {
+    "DS01": [],
+    "DS02": []
+  },
+  "limitations": [
+    "No global non-adjacent duplicate proof",
+    "No physical accuracy validation",
+    "No explicit timestamps",
+    "P2 definition/unit unconfirmed",
+    "Upstream version and Kaggle redistribution terms unverified",
+    "No trained models or prediction metrics"
+  ]
+}

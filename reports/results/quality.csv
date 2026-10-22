@@ -1,0 +1,7 @@
+dimension,scope,finding,limitation
+Conformity,Full metadata + all auxiliary codes,Arrays aligned; invalid category codes: 0; invalid IDs/cycles: 0,P2 definition/unit requires source confirmation; file metadata does not prove physical units.
+Completeness,Every numeric cell in both files,NaN: 0; infinity: 0,Sentinel values and gaps in physical time are not established by NaN checks.
+Uniqueness,"All adjacent rows + 12,000 evenly spaced rows per partition",Adjacent exact duplicates: 0; sampled exact duplicates: 0,All non-adjacent duplicates were not exhaustively checked; repeated flight keys are valid.
+Accuracy,Full ranges + development-sample IQR screens,49 dataset-variable pairs have sampled IQR flags; no rows removed,Extreme values are not proven errors; no independent physical ground truth.
+Timeliness,Provided sources and metadata,Static simulation data; no calendar timestamp column,Download version/terms remain to be recorded; current operational relevance is unvalidated.
+Consistency,All engine-flight aggregates + full auxiliary scan,"Engine overlap: {'DS01': [], 'DS02': []}; cycle/label/health checks flagged: 0",Both partitions were inspected for understanding; keep test data out of later tuning.

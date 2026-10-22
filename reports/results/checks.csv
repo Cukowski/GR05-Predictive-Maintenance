@@ -1,0 +1,5 @@
+dataset,partition,rows,aligned,invalid_categories,invalid_indices,within_unit_cycle_reversals,adjacent_exact_duplicates,diagnostic_sample_rows,sample_exact_duplicates
+DS01,dev,4906636,True,0,0,0,0,12000,0
+DS01,test,2735232,True,0,0,0,0,12000,0
+DS02,dev,5263447,True,0,0,0,0,12000,0
+DS02,test,1253743,True,0,0,0,0,12000,0
