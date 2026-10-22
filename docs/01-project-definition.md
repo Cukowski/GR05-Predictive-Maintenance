@@ -4,7 +4,7 @@
 **Group:** GR05, Manufacturing / Maintenance  
 **Team:** Selçuk Ata Aksoy and Denzel Gregory Pragassa  
 **Supervisor:** Prof. Dr. Monika Frey-Luxemburger  
-**Status:** Topic and N-CMAPSS dataset approved by the lecturer; data access verification and pilot feasibility pending.
+**Status:** Topic and N-CMAPSS dataset approved by the lecturer; local DS01/DS02 access and descriptive feasibility verified; source terms and team scope review pending.
 
 ## One-sentence problem
 Unexpected deterioration of industrial machinery can lead to unplanned downtime and additional maintenance costs, and sensor-based estimates of remaining useful life may support earlier maintenance planning.
@@ -32,6 +32,6 @@ CRISP-DM: business understanding → data understanding → preparation → mode
 
 ## Next decisions
 - [x] Confirm with lecturer that N-CMAPSS/RUL is acceptable in the Manufacturing group.
-- [ ] Download and audit a feasible subset and document provenance.
+- [x] Download and audit DS01/DS02 locally; record file identity and remaining provenance questions.
 - [ ] Verify the intended predictor and target columns and appropriate unit-based split.
 - [ ] Finalize research scope after feasibility assessment.
