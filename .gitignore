@@ -4,6 +4,11 @@
 *.h5
 *.hdf5
 
+# Local third-party course materials and Kaggle reference files.
+/tasks/
+/data/N-CMAPSS_Example_data_loading_and_exploration.ipynb
+/data/Run_to_Failure_Simulation_Under_Real_Flight_Conditions_Dataset.pdf
+
 # Local Python environments and caches.
 .venv/
 venv/
