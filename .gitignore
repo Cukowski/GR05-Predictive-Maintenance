@@ -8,6 +8,7 @@
 /tasks/
 /data/N-CMAPSS_Example_data_loading_and_exploration.ipynb
 /data/Run_to_Failure_Simulation_Under_Real_Flight_Conditions_Dataset.pdf
+/data/kde_DS02.png
 
 # Local Python environments and caches.
 .venv/
