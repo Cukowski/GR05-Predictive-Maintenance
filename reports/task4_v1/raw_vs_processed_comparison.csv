@@ -1,0 +1,5 @@
+dataset,partition,raw_sensor_readings,raw_flight_aggregates,clean_flight_rows,model_ready_rows,raw_candidate_features,engineered_features,history_indicator_features,missing_history_cells_before_imputation,missing_predictor_cells_after_imputation,removed_flights
+DS01,dev,4906636,553,553,553,18,12,3,24,0,0
+DS01,test,2735232,341,341,341,18,12,3,16,0,0
+DS02,dev,5263447,446,446,446,18,12,3,24,0,0
+DS02,test,1253743,202,202,202,18,12,3,12,0,0
