@@ -1,0 +1,22 @@
+[
+  "numeric__alt_m_mean",
+  "numeric__Mach_mean",
+  "numeric__TRA_pct_mean",
+  "numeric__T2_K_mean",
+  "numeric__T24_K_mean",
+  "numeric__T30_K_mean",
+  "numeric__T48_K_mean",
+  "numeric__T50_K_mean",
+  "numeric__P15_kPa_mean",
+  "numeric__P21_kPa_mean",
+  "numeric__P24_kPa_mean",
+  "numeric__Ps30_kPa_mean",
+  "numeric__P40_kPa_mean",
+  "numeric__P50_kPa_mean",
+  "numeric__Nf_rpm_mean",
+  "numeric__Nc_rpm_mean",
+  "numeric__Wf_kg_s_mean",
+  "numeric__n_readings",
+  "source__dataset_DS01",
+  "source__dataset_DS02"
+]

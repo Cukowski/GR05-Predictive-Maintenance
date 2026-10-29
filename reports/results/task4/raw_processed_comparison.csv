@@ -1,0 +1,7 @@
+stage,row_meaning,rows,representation
+Raw,One ordered reading,14159058,47 stored fields; six aligned blocks
+Prepared,One completed flight,1542,45 physical/history features + metadata + RUL
+Train,One completed flight,574,50 finite model inputs; target separate
+Validation,One completed flight,343,50 finite model inputs; target separate
+Test,One completed flight,543,50 finite model inputs; target separate
+Quarantine,One completed flight,82,"Retained; no fitting, validation, or test scoring"

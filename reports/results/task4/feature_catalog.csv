@@ -1,0 +1,46 @@
+feature,family,source,unit,definition,conversion_factor,available,baseline
+alt_m_mean,current_flight,alt,m,Mean of finite readings in the current completed flight,0.3048,end of current flight,True
+alt_m_std,current_flight,alt,m,Sample standard deviation of finite readings in the current flight (ddof=1),0.3048,end of current flight,False
+Mach_mean,current_flight,Mach,dimensionless,Mean of finite readings in the current completed flight,1.0,end of current flight,True
+Mach_std,current_flight,Mach,dimensionless,Sample standard deviation of finite readings in the current flight (ddof=1),1.0,end of current flight,False
+TRA_pct_mean,current_flight,TRA,%,Mean of finite readings in the current completed flight,1.0,end of current flight,True
+TRA_pct_std,current_flight,TRA,%,Sample standard deviation of finite readings in the current flight (ddof=1),1.0,end of current flight,False
+T2_K_mean,current_flight,T2,K,Mean of finite readings in the current completed flight,0.5555555555555556,end of current flight,True
+T2_K_std,current_flight,T2,K,Sample standard deviation of finite readings in the current flight (ddof=1),0.5555555555555556,end of current flight,False
+T24_K_mean,current_flight,T24,K,Mean of finite readings in the current completed flight,0.5555555555555556,end of current flight,True
+T24_K_std,current_flight,T24,K,Sample standard deviation of finite readings in the current flight (ddof=1),0.5555555555555556,end of current flight,False
+T30_K_mean,current_flight,T30,K,Mean of finite readings in the current completed flight,0.5555555555555556,end of current flight,True
+T30_K_std,current_flight,T30,K,Sample standard deviation of finite readings in the current flight (ddof=1),0.5555555555555556,end of current flight,False
+T48_K_mean,current_flight,T48,K,Mean of finite readings in the current completed flight,0.5555555555555556,end of current flight,True
+T48_K_std,current_flight,T48,K,Sample standard deviation of finite readings in the current flight (ddof=1),0.5555555555555556,end of current flight,False
+T50_K_mean,current_flight,T50,K,Mean of finite readings in the current completed flight,0.5555555555555556,end of current flight,True
+T50_K_std,current_flight,T50,K,Sample standard deviation of finite readings in the current flight (ddof=1),0.5555555555555556,end of current flight,False
+P15_kPa_mean,current_flight,P15,kPa,Mean of finite readings in the current completed flight,6.894757293168,end of current flight,True
+P15_kPa_std,current_flight,P15,kPa,Sample standard deviation of finite readings in the current flight (ddof=1),6.894757293168,end of current flight,False
+P21_kPa_mean,current_flight,P21,kPa,Mean of finite readings in the current completed flight,6.894757293168,end of current flight,True
+P21_kPa_std,current_flight,P21,kPa,Sample standard deviation of finite readings in the current flight (ddof=1),6.894757293168,end of current flight,False
+P24_kPa_mean,current_flight,P24,kPa,Mean of finite readings in the current completed flight,6.894757293168,end of current flight,True
+P24_kPa_std,current_flight,P24,kPa,Sample standard deviation of finite readings in the current flight (ddof=1),6.894757293168,end of current flight,False
+Ps30_kPa_mean,current_flight,Ps30,kPa,Mean of finite readings in the current completed flight,6.894757293168,end of current flight,True
+Ps30_kPa_std,current_flight,Ps30,kPa,Sample standard deviation of finite readings in the current flight (ddof=1),6.894757293168,end of current flight,False
+P40_kPa_mean,current_flight,P40,kPa,Mean of finite readings in the current completed flight,6.894757293168,end of current flight,True
+P40_kPa_std,current_flight,P40,kPa,Sample standard deviation of finite readings in the current flight (ddof=1),6.894757293168,end of current flight,False
+P50_kPa_mean,current_flight,P50,kPa,Mean of finite readings in the current completed flight,6.894757293168,end of current flight,True
+P50_kPa_std,current_flight,P50,kPa,Sample standard deviation of finite readings in the current flight (ddof=1),6.894757293168,end of current flight,False
+Nf_rpm_mean,current_flight,Nf,rpm,Mean of finite readings in the current completed flight,1.0,end of current flight,True
+Nf_rpm_std,current_flight,Nf,rpm,Sample standard deviation of finite readings in the current flight (ddof=1),1.0,end of current flight,False
+Nc_rpm_mean,current_flight,Nc,rpm,Mean of finite readings in the current completed flight,1.0,end of current flight,True
+Nc_rpm_std,current_flight,Nc,rpm,Sample standard deviation of finite readings in the current flight (ddof=1),1.0,end of current flight,False
+Wf_kg_s_mean,current_flight,Wf,kg/s,Mean of finite readings in the current completed flight,0.45359237,end of current flight,True
+Wf_kg_s_std,current_flight,Wf,kg/s,Sample standard deviation of finite readings in the current flight (ddof=1),0.45359237,end of current flight,False
+n_readings,current_flight,row count,readings,"Number of ordered readings in current flight; proxy for observed flight length, not verified seconds",1.0,end of current flight,True
+T48_K_trailing3,causal_history,T48_K,K,"Mean of current and up to 2 previous flight means, within the same history",1.0,end of current flight; no future flights,False
+T48_K_delta_prev,causal_history,T48_K,K,Current flight mean minus previous flight mean; missing on first observed flight,1.0,end of current flight; no future flights,False
+Nc_rpm_trailing3,causal_history,Nc_rpm,rpm,"Mean of current and up to 2 previous flight means, within the same history",1.0,end of current flight; no future flights,False
+Nc_rpm_delta_prev,causal_history,Nc_rpm,rpm,Current flight mean minus previous flight mean; missing on first observed flight,1.0,end of current flight; no future flights,False
+Wf_kg_s_trailing3,causal_history,Wf_kg_s,kg/s,"Mean of current and up to 2 previous flight means, within the same history",1.0,end of current flight; no future flights,False
+Wf_kg_s_delta_prev,causal_history,Wf_kg_s,kg/s,Current flight mean minus previous flight mean; missing on first observed flight,1.0,end of current flight; no future flights,False
+lpc_pressure_ratio,physical_combination,current flight means,dimensionless,"P24 mean / P21 mean, both total pressures",1.0,end of current flight,False
+burner_to_lpt_pressure_ratio,physical_combination,current flight means,dimensionless,"P40 mean / P50 mean; diagnostic ratio, not calibrated efficiency",1.0,end of current flight,False
+hpt_to_lpt_temperature_drop_K,physical_combination,current flight means,K difference,T48 mean minus T50 mean; diagnostic temperature difference,1.0,end of current flight,False
+core_to_fan_speed_ratio,physical_combination,current flight means,dimensionless,Nc mean / Nf mean; diagnostic shaft speed ratio,1.0,end of current flight,False

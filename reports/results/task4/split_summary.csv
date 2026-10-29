@@ -1,0 +1,8 @@
+dataset,source_partition,split,flights,histories,raw_readings
+DS01,dev,train,370,4,2789639
+DS01,dev,validation,183,2,2116997
+DS01,test,test,341,4,2735232
+DS02,dev,quarantine_test_related,82,1,952711
+DS02,dev,train,204,3,2386597
+DS02,dev,validation,160,2,1924139
+DS02,test,test,202,3,1253743

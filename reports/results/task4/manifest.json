@@ -1,0 +1,197 @@
+{
+  "version_id": "task4-v1-97719f3fe055",
+  "fingerprint": "97719f3fe055951f6ca51f91a1f33af7ca5cfced6663dfdc4424d07a9e25a890",
+  "created_at": "2026-10-29T10:46:06.486884+01:00",
+  "config": {
+    "schema_version": "task4-v1",
+    "files": [
+      "N-CMAPSS_DS01-005.h5",
+      "N-CMAPSS_DS02-006.h5"
+    ],
+    "prediction_point": "end_of_completed_flight",
+    "chunk_rows": 100000,
+    "validation_unit_ids": [
+      5,
+      6,
+      18
+    ],
+    "cross_dataset_grouping": "conservatively_link_equal_unit_ids",
+    "exclude_unconfirmed_sensor": "P2",
+    "rolling_window_flights": 3,
+    "numeric_imputation": "training_median_with_missing_indicators",
+    "scaling": "training_standard_score_ddof_0",
+    "categorical_predictors": [
+      "dataset"
+    ],
+    "outlier_policy": "retain_finite_values_no_IQR_deletion"
+  },
+  "raw_files": [
+    {
+      "file": "N-CMAPSS_DS01-005.h5",
+      "bytes": 2873351432,
+      "sha256": "3abdcee2a3c8136e8880e5d43ac8cdf12ab9f7f3ab37145f23b24c11335afbed"
+    },
+    {
+      "file": "N-CMAPSS_DS02-006.h5",
+      "bytes": 2450472504,
+      "sha256": "47971a68b239ecb756833218a95d68ded6eb7e63ee84e86671c8b188de1ca765"
+    }
+  ],
+  "environment": {
+    "numpy": "2.5.4",
+    "pandas": "3.0.6",
+    "h5py": "3.16.0",
+    "scikit-learn": "1.9.1",
+    "scipy": "1.18.1",
+    "joblib": "1.6.0",
+    "python": "3.12.3"
+  },
+  "code": {
+    "src/preprocessing.py": "e6667af8b79ce55d524d725f1508e7bb5705cca87f281bbd89919ae9f0edd4a5",
+    "src/data_understanding.py": "7aa0418f38243b11108b7d55589758120feb75bcde6471867432b75efc139588",
+    "config/preprocessing.json": "b92fa20947442bb4b60d12c2704f205c3bff272879173b9f307c140a027bd764"
+  },
+  "raw_readings": 14159058,
+  "processed_flights": 1542,
+  "engine_histories": 19,
+  "numeric_features": 45,
+  "model_columns": 50,
+  "baseline_columns": 20,
+  "missing_numeric_features": 57,
+  "missing_by_split": {
+    "quarantine_test_related": 3,
+    "test": 21,
+    "train": 21,
+    "validation": 12
+  },
+  "learned_missing_indicators": [
+    "T48_K_delta_prev",
+    "Nc_rpm_delta_prev",
+    "Wf_kg_s_delta_prev"
+  ],
+  "matrix_shapes": {
+    "train": [
+      574,
+      50
+    ],
+    "validation": [
+      343,
+      50
+    ],
+    "test": [
+      543,
+      50
+    ]
+  },
+  "quarantined_flights": 82,
+  "predictor_nonfinite": 0,
+  "impossible_predictor_values": 0,
+  "readings_removed": 0,
+  "fitting_rows": 574,
+  "fitting_engine_groups": [
+    "unit:1",
+    "unit:16",
+    "unit:2",
+    "unit:20",
+    "unit:3",
+    "unit:4"
+  ],
+  "artifacts": [
+    {
+      "file": "X_test.csv",
+      "bytes": 398517,
+      "sha256": "099897dbbf09d4d20da0854c2fef3516d83d084060fd277d7e8c89139a686759"
+    },
+    {
+      "file": "X_train.csv",
+      "bytes": 420749,
+      "sha256": "e7cf3a0b7753293103f9f5bbd4bbdcdf3c35990a760c31166f574b0c043161b7"
+    },
+    {
+      "file": "X_validation.csv",
+      "bytes": 253706,
+      "sha256": "eb7d048b9dd1ea65b02ac884b2360edea5dc2b9ecfc0412193d797bad79835c0"
+    },
+    {
+      "file": "baseline_columns.json",
+      "bytes": 522,
+      "sha256": "6e5499153fee805a98a32951a7b72956b26e970a3d926815419cc233d320e045"
+    },
+    {
+      "file": "cleaning_audit.csv",
+      "bytes": 224,
+      "sha256": "6fbca6cdc2e22860248061980538783210d64ddc3c1a38dfe146a85319d02e96"
+    },
+    {
+      "file": "engine_splits.csv",
+      "bytes": 767,
+      "sha256": "fd1883d7ae7a23b01833b4e84ff6d5a7146c1c4acc7741222d1d95da083f3f6e"
+    },
+    {
+      "file": "feature_catalog.csv",
+      "bytes": 6744,
+      "sha256": "63c5c215993328710b0aa5771b72b2e004fe20acdcd88a0a8fd1d3899c206f3f"
+    },
+    {
+      "file": "flights_features.csv",
+      "bytes": 1026901,
+      "sha256": "3b6b444e86864647dd5e266489b5913909ce68ed7e8b3ebe57dfa373ba73aa6e"
+    },
+    {
+      "file": "imputation_parameters.csv",
+      "bytes": 1662,
+      "sha256": "b9a032fc206c490ca47721d6595cad233cc3ec188d5618669ef1f09b3729777b"
+    },
+    {
+      "file": "preprocessor.joblib",
+      "bytes": 6766,
+      "sha256": "a97536d737bfdc5586659f1e31225c7a32d466a6582e1ab5e0e746dd9eae4a24"
+    },
+    {
+      "file": "quarantine.csv",
+      "bytes": 56807,
+      "sha256": "0820915e227d7734c0ba07111590251490a30e798314a3085a542c10a5acd55f"
+    },
+    {
+      "file": "rows_test.csv",
+      "bytes": 20421,
+      "sha256": "712809bbb9a603e60d6c914696ba2504dc53656d74600723c45c47de65811b87"
+    },
+    {
+      "file": "rows_train.csv",
+      "bytes": 21074,
+      "sha256": "4acee638da2418407f35ce9c6000fcf0c5dd69ffb1b1f15d0e79d2648dc8c23c"
+    },
+    {
+      "file": "rows_validation.csv",
+      "bytes": 14324,
+      "sha256": "2a3e7ec9f12376b8beab55745cbba71d2ceb4d66f0da169a404e3fe4769474aa"
+    },
+    {
+      "file": "scaling_parameters.csv",
+      "bytes": 2991,
+      "sha256": "1cf578164f81c1a0f6ed11d4f9e4c70a90131068c0dee6c186ffeab42f39eb97"
+    },
+    {
+      "file": "split_summary.csv",
+      "bytes": 291,
+      "sha256": "8afce9770a7ad88e83b875ea1fe54e3aee634868323bcc224474075c311bb405"
+    },
+    {
+      "file": "y_test.csv",
+      "bytes": 1563,
+      "sha256": "4833c4d3ad005059798bfaf3e83fb92023a7cd8dfcec955ac3a86202c20ab06a"
+    },
+    {
+      "file": "y_train.csv",
+      "bytes": 1656,
+      "sha256": "4f03dabe602db9fc5a0da75a3669a27b454e8479f9df5277842ba328db573bf4"
+    },
+    {
+      "file": "y_validation.csv",
+      "bytes": 993,
+      "sha256": "894c4d32d117d519b3d515a3461c032bafa26ffd635d14ea926a50d122afae43"
+    }
+  ],
+  "fit_numeric_max_abs_mean": 2.597070835583084e-14
+}
