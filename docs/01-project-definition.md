@@ -33,5 +33,5 @@ CRISP-DM: business understanding → data understanding → preparation → mode
 ## Next decisions
 - [x] Confirm with lecturer that N-CMAPSS/RUL is acceptable in the Manufacturing group.
 - [x] Download and audit DS01/DS02 locally; record file identity and remaining provenance questions.
-- [ ] Verify the intended predictor and target columns and appropriate unit-based split.
+- [x] Define the end-of-flight predictor/target representation and conservative engine-group splits for Task 4.
 - [ ] Finalize research scope after feasibility assessment.

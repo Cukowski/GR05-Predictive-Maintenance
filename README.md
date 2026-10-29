@@ -9,9 +9,9 @@ Estimating aircraft engine **Remaining Useful Life (RUL), in flight cycles**, us
 
 ## Current status
 
-The lecturer approved the topic and dataset. Task 1 is documented; the Task 2 reports remain drafts. **Task 3: Data Understanding** now has an executed, explanatory Jupyter notebook, a report, and a separate findings page. Team review of the interpretations is pending.
+The lecturer approved the topic and dataset. Task 1 is documented; the Task 2 reports remain drafts. **Tasks 3 and 4** now have executed explanatory notebooks, reproducible evidence, and separate findings/preparation pages. Task 4 has built versioned local flight datasets and fitted preprocessing; team interpretation review is pending.
 
-DS01 and DS02 are available locally under `data/raw/`. The analysis scans every numeric field and reports structure, engine/flight counts, RUL label checks, summary statistics, and six data quality dimensions. Sampled distributions and outlier/duplicate diagnostics are labelled with their scope. No predictive model, MAE/RMSE result, or measured maintenance savings is claimed. Upstream version/redistribution terms and some variable semantics remain open.
+DS01 and DS02 are available locally under `data/raw/`. The analysis scans every numeric field and reports structure, engine/flight counts, RUL label checks, summary statistics, and six data quality dimensions. Sampled distributions and outlier/duplicate diagnostics are labelled with their scope. Task 4 prepares 1,542 flight rows: 574 training, 343 validation, 543 test, and 82 quarantined for a possible cross-subset test-history link. It fits preprocessing only, with 50 candidate model columns and a simpler 20-column baseline selection. No RUL prediction model, MAE/RMSE result, or measured maintenance savings is claimed. Upstream version/redistribution terms and some variable semantics remain open.
 
 ## Start with the notebook
 
@@ -35,6 +35,25 @@ python scripts/build_task3_report.py
 ```
 
 The figures and compact CSV/JSON evidence are exported by the notebook. The page/report generator reads those exports, so the human-facing numbers remain traceable. Primary package versions are pinned in `requirements.txt`; `requirements-lock.txt` records the full installed environment. To reproduce that complete dependency set, install the latter instead.
+
+## Task 4 — prepare the modeling dataset
+
+Open [notebooks/02-preprocessing.ipynb](notebooks/02-preprocessing.ipynb) and run it top to bottom. It explains snapshots vs flights vs engines, the relevant inputs, physical units, missing values, engineering, engine-group splits, and how X (inputs) differs from y (the answer). Each prepared row is one **completed flight**, with a prediction made at its end. Future flights, final lifetime, IDs and hidden health state are excluded from predictors.
+
+Command-line workflow:
+
+```bash
+python scripts/prepare_data.py
+# Run notebooks/02-preprocessing.ipynb for the guided examples and charts.
+python scripts/build_task4_report.py
+python -m unittest discover -s tests -v
+```
+
+The actual current version is identified by [reports/results/task4/manifest.json](reports/results/task4/manifest.json). Its directory under `data/processed/` contains physical-unit features, finite `X_train.csv` / `X_validation.csv` / `X_test.csv`, separate RUL labels and row identities, quarantine rows, and `preprocessor.joblib`. Raw and processed data remain local and ignored by Git. Read the [Task 4 report](docs/06-data-preparation.md) or [preparation page](preparation.html) for the complete results and feature catalog.
+
+Numeric preparation uses training-only median imputation with missingness indicators and standardization. The source collection DS01/DS02 is one-hot encoded. No raw predictor repair was needed in these files; 57 engineered first-flight gaps are handled explicitly. P2 is excluded pending source confirmation. Both datasets are integrated, but equal unit IDs are linked conservatively across subsets: DS02 development unit 10 is quarantined because unit 10 is test in DS01. Validation IDs 5, 6, and 18 are fixed in configuration, independently of model performance.
+
+The version fingerprint includes raw hashes, code/configuration, Python and relevant package versions; outputs are verified before reuse. Changed inputs produce a new version rather than overwriting an old one. Preprocessing must be refitted within each training fold if using grouped cross-validation later.
 
 ## Problem and approach
 
@@ -60,14 +79,18 @@ Operating conditions come from real flight profiles; engine degradation and sens
 | [docs/03-data-inventory-access.md](docs/03-data-inventory-access.md) | Task 2 inventory, updated with local verification |
 | [docs/04-dataset-evaluation.md](docs/04-dataset-evaluation.md) | Historical dataset proposal |
 | [docs/05-data-understanding.md](docs/05-data-understanding.md) | Task 3 findings and six-dimension quality report |
+| [docs/06-data-preparation.md](docs/06-data-preparation.md) | Task 4 report, feature engineering, integration and version comparison |
+| [notebooks/02-preprocessing.ipynb](notebooks/02-preprocessing.ipynb) | Executed Task 4 tutorial, transformations and checks |
+| [src/preprocessing.py](src/preprocessing.py), [config/preprocessing.json](config/preprocessing.json) | Flight preparation and explicit split/feature policies |
+| [scripts/prepare_data.py](scripts/prepare_data.py), [scripts/build_task4_report.py](scripts/build_task4_report.py) | Create/verify local data versions and rebuild Task 4 report/page |
 | [docs/ai-use-log.md](docs/ai-use-log.md) | Concise AI assistance and review disclosure |
 | [notebooks/01-data-understanding.ipynb](notebooks/01-data-understanding.ipynb) | Executed guided analysis and presentation questions |
 | [src/data_understanding.py](src/data_understanding.py) | Reusable read-only chunked audit and feature definitions |
 | [data/README.md](data/README.md) | Data placement, source follow-up, exact sizes and hashes |
 | `reports/figures/`, `reports/results/` | Seven figures and small reproducible evidence exports |
 | [scripts/build_task3_report.py](scripts/build_task3_report.py) | Rebuilds the Task 3 report and findings HTML from exports |
-| `tests/` | Chunk-boundary/numerical and semantic-scale checks |
-| [index.html](index.html), [findings.html](findings.html), `assets/` | Overview and separate research findings, ready for GitHub Pages |
+| `tests/` | Chunk-boundary/numerical, causal-feature, split-isolation, scaling and semantic-scale checks |
+| [index.html](index.html), [findings.html](findings.html), [preparation.html](preparation.html), `assets/` | Overview, Task 3 findings and Task 4 preparation, ready for GitHub Pages |
 
 Document numbers indicate reading order, not task numbers. The current structure supports the original plan:
 
@@ -78,6 +101,8 @@ GR05-Predictive-Maintenance/
 ├── requirements-lock.txt
 ├── index.html
 ├── findings.html
+├── preparation.html
+├── config/
 ├── assets/
 ├── docs/
 │   ├── 01-project-definition.md
@@ -85,21 +110,22 @@ GR05-Predictive-Maintenance/
 │   ├── 03-data-inventory-access.md
 │   ├── 04-dataset-evaluation.md
 │   ├── 05-data-understanding.md
-│   ├── 06-methodology.md            # Planned
+│   ├── 06-data-preparation.md
+│   ├── 07-methodology.md            # Planned
 │   ├── decisions.md                 # Planned
 │   ├── references.md                # Planned
 │   └── ai-use-log.md
 ├── data/
 │   ├── README.md
 │   ├── raw/                         # Local only; ignored by Git
-│   └── processed/                   # Planned; local only
+│   └── processed/                   # Versioned prepared data; local only
 ├── notebooks/
 │   ├── 01-data-understanding.ipynb
-│   ├── 02-preprocessing.ipynb       # Planned
+│   ├── 02-preprocessing.ipynb
 │   └── 03-modeling.ipynb            # Planned
 ├── src/
 │   ├── data_understanding.py
-│   ├── preprocessing.py            # Planned
+│   ├── preprocessing.py
 │   ├── features.py                   # Planned
 │   ├── train.py                      # Planned
 │   └── evaluate.py                   # Planned
@@ -117,19 +143,20 @@ Create planned files when actual work needs them. Course PDFs/slides and downloa
 
 ## Project website
 
-The homepage keeps the project overview concise and links to [findings.html](findings.html) for the analysis, charts, quality checks, and downloads. Both pages work as static HTML without a framework. Optional JavaScript handles decorative turbine motion and engine-table filters; reduced-motion preferences are respected.
+The homepage keeps the project overview concise and links to [findings.html](findings.html) for the analysis, charts, quality checks, and downloads. The separate [preparation.html](preparation.html) explains Task 4 without crowding the homepage. All three pages work as static HTML without a framework. Optional JavaScript handles decorative turbine motion and engine-table filters; reduced-motion preferences are respected.
 
 Open `index.html` locally. For GitHub Pages, after reviewing and pushing select **Settings → Pages → Deploy from a branch → main → /(root)**. See [GitHub's publishing-source instructions](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site). The expected address after deployment is `https://cukowski.github.io/GR05-Predictive-Maintenance/`; hosting has not been configured or verified here.
 
 ## Next steps and milestones
 
-1. Review the Task 2 drafts, Task 3 notebook, feature scales, and quality limitations together; practise explaining the findings.
+1. Review the Task 2 drafts and Task 3/4 notebooks together; practise explaining flight rows, inputs vs targets, feature formulas, and the conservative split policy.
 2. Confirm source version/terms, P2 and stall-margin definitions, and whether shared histories across subsets limit independence.
-3. Decide the prediction point and DS01 preparation/validation protocol before implementing preprocessing and a baseline.
+3. Train a transparent baseline on the smaller feature selection, then compare a simple regressor using development-engine validation before final test.
 
 | Date | Milestone |
 |---|---|
-| 22 October 2026 | Local DS01/DS02 descriptive feasibility completed; team scope review pending |
+| 22 October 2026 | Local DS01/DS02 descriptive feasibility completed |
+| 29 October 2026 | Task 4 pipeline executed; prepared local version and model matrices available, team review pending |
 | 19 November 2026 | Business case, dataset, and initial descriptive analysis presentation |
 | 21 January 2027 | Final modeling, evaluation, business discussion, and presentation |
 

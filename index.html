@@ -96,7 +96,7 @@
         <div><dt>DATA SOURCE</dt><dd>NASA N-CMAPSS</dd></div>
         <div><dt>PREDICTION TARGET</dt><dd>Remaining flight cycles</dd></div>
         <div><dt>METHOD</dt><dd>CRISP-DM + regression</dd></div>
-        <div><dt>CURRENT PHASE</dt><dd><span class="status-dot orange" aria-hidden="true"></span> Data understanding</dd></div>
+        <div><dt>CURRENT PHASE</dt><dd><span class="status-dot orange" aria-hidden="true"></span> Data preparation</dd></div>
       </dl>
     </div>
 
@@ -116,11 +116,11 @@
     <section id="progress" class="progress-section" aria-labelledby="progress-title">
       <div class="wrap section">
         <div class="section-label"><span>02 / FLIGHT PLAN</span><span>STEP BY STEP</span></div>
-        <div class="section-heading"><h2 id="progress-title">Before the predictions,<br>the groundwork.</h2><p>Topic and dataset approved.<br>DS01 and DS02 acquired and explored.<br>Now reviewing the data understanding findings.</p></div>
+        <div class="section-heading"><h2 id="progress-title">Before the predictions,<br>the groundwork.</h2><p>Topic and dataset approved.<br>Data understanding and preparation executed.<br>Now reviewing the inputs for baseline modeling.</p></div>
         <ol class="flight-plan">
           <li class="complete"><span class="step-state">01 / DOCUMENTED</span><h3>Define the problem</h3><p>Research question, project scope, and topic approval.</p><a href="https://github.com/Cukowski/GR05-Predictive-Maintenance/blob/main/docs/01-project-definition.md">Project definition <span aria-hidden="true">↗</span></a></li>
-          <li class="current"><span class="step-state">02 / IN PROGRESS</span><h3>Understand the data</h3><p>DS01 and DS02 inspected. Guided notebook and quality report prepared; team review pending.</p><a href="https://github.com/Cukowski/GR05-Predictive-Maintenance/blob/main/docs/03-data-inventory-access.md">Data inventory <span aria-hidden="true">↗</span></a></li>
-          <li><span class="step-state">03 / PLANNED</span><h3>Explore & model</h3><p>Inspect sensor trajectories, establish a baseline, and compare regressors.</p></li>
+          <li class="complete"><span class="step-state">02 / DOCUMENTED</span><h3>Understand the data</h3><p>DS01 and DS02 inspected. Guided notebook and quality report prepared; team review pending.</p><a href="https://github.com/Cukowski/GR05-Predictive-Maintenance/blob/main/docs/03-data-inventory-access.md">Data inventory <span aria-hidden="true">↗</span></a></li>
+          <li class="current"><span class="step-state">03 / PREPARED</span><h3>Prepare for modeling</h3><p>Versioned flight features and fitted preprocessing available. Baseline modeling comes next.</p><a href="preparation.html">Task 4 results <span aria-hidden="true">↗</span></a></li>
           <li><span class="step-state">04 / PLANNED</span><h3>Evaluate & explain</h3><p>Test on held-out engines and discuss errors, limitations, and implications.</p></li>
         </ol>
       </div>
@@ -128,8 +128,8 @@
 
     <section id="findings" class="section wrap" aria-labelledby="findings-title">
       <div class="section-label"><span>03 / RESEARCH NOTES</span><span>ROOM FOR WHAT WE LEARN</span></div>
-      <div class="section-heading"><h2 id="findings-title">Our first look inside.</h2><p>DS01 and DS02 explored: engine histories, flight conditions, RUL labels, and six dimensions of data quality. Model evaluation comes later.</p></div>
-      <div class="hero-actions"><a class="button primary" href="findings.html">Explore the findings <span aria-hidden="true">↗</span></a><a class="text-link" href="notebooks/01-data-understanding.ipynb" download>Get the guided notebook <span aria-hidden="true">↓</span></a></div>
+      <div class="section-heading"><h2 id="findings-title">Our first look inside.</h2><p>DS01 and DS02 explored: engine histories, flight conditions, RUL labels, and six dimensions of data quality. Versioned modeling inputs are now prepared; model evaluation comes later.</p></div>
+      <div class="hero-actions"><a class="button primary" href="findings.html">Explore the findings <span aria-hidden="true">↗</span></a><a class="text-link" href="preparation.html">Task 4: data preparation <span aria-hidden="true">↗</span></a></div>
     </section>
 
     <section class="team-section wrap" aria-labelledby="team-title">
@@ -138,6 +138,6 @@
     </section>
   </main>
 
-  <footer class="wrap site-footer"><a class="wordmark" href="./">GR05 <span class="wordmark-detail">/ PREDICTIVE MAINTENANCE</span></a><p>Project status: 22 October 2026</p><a href="https://github.com/Cukowski/GR05-Predictive-Maintenance">Follow the research <span aria-hidden="true">↗</span></a></footer>
+  <footer class="wrap site-footer"><a class="wordmark" href="./">GR05 <span class="wordmark-detail">/ PREDICTIVE MAINTENANCE</span></a><p>Project status: 29 October 2026</p><a href="https://github.com/Cukowski/GR05-Predictive-Maintenance">Follow the research <span aria-hidden="true">↗</span></a></footer>
 </body>
 </html>
