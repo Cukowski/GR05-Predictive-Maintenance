@@ -21,6 +21,22 @@ The tracked reconstructed CSV contains **1,542 engine-flight records**: 574 trai
 
 ## Run the analysis
 
+### Integration review — 11 November 2026
+
+The branch was reviewed and merged into local `main` as a **working draft**, not a completed Task 5 submission. All eight notebook code cells ran successfully in an isolated temporary checkout using the hash-verified local Task 4 version. They generated all six planned sensor/flight charts and statistics exports. The statistics independently matched the 574 training flights; training and validation histories remained separate. The reconstructed CSV's 1,542 rows and included fields matched the corresponding full Task 4 features within numerical tolerance. All seven existing project tests passed.
+
+The review execution did not replace the committed notebook or add its temporary outputs. To finish the submission:
+
+- Save and review the executed notebook, six generated charts, and statistics exports in the repository.
+- Replace the final notebook placeholder with numerical findings for H1–H4, exceptions, and a concise maintenance/business interpretation; record training conclusions before the validation check.
+- Add a reproducible build step for the reconstructed feature CSV and the two structural charts, or identify those as externally generated artifacts.
+- Clarify that the operating-condition stage boxplots are flight-weighted; the sensor-stage plots use engine-level medians. Neither establishes causal effects or independent-observation significance.
+- Add the dashboard/slide if required by the latest Task 5 handout. No Task 5 task sheet beyond V4.0 was available locally for this review, so its exact deliverable list was not independently confirmed.
+
+The notebook currently requires the full local Task 4 dataset. Its reconstructed alternative needs an explicit input option before it can be used without editing the notebook.
+
+### Execution steps
+
 1. Check out `task5/descriptive-analysis` and activate the project's Python environment.
 2. For the **full Task 4 feature set**, use the Kaggle-sourced DS01/DS02 HDF5 files in `data/raw/` and run `python scripts/prepare_data.py` as described in [data/README.md](../data/README.md). Confirm that the generated `data/processed/<version_id>/flights_features.csv` matches [the Task 4 manifest](../reports/results/task4/manifest.json).
 3. The **tracked alternative** `reports/results/task5/flights_features_from_cycles.csv` can support descriptive calculations on the fields it includes. Using it with the existing third notebook requires changing the notebook input path or adding a documented fallback; it is not a drop-in replacement for all Task 4 features.
