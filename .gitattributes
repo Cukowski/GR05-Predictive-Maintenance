@@ -1,2 +1,3 @@
 # Matplotlib emits valid SVG path lines with trailing spaces.
 reports/figures/*.svg -whitespace linguist-generated=true
+reports/figures/**/*.svg -whitespace linguist-generated=true

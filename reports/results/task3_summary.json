@@ -1,5 +1,5 @@
 {
-  "analysis_date": "2026-10-22",
+  "analysis_date": "2026-11-11",
   "files": [
     {
       "file": "N-CMAPSS_DS01-005.h5",
@@ -120,7 +120,7 @@
       "dimension": "Conformity",
       "scope": "Full metadata + all auxiliary codes",
       "finding": "Arrays aligned; invalid category codes: 0; invalid IDs/cycles: 0",
-      "limitation": "P2 definition/unit requires source confirmation; file metadata does not prove physical units."
+      "limitation": "P2 definition/unit confirmed by journal Table 5; metadata alone does not prove physical accuracy."
     },
     {
       "dimension": "Completeness",
@@ -144,7 +144,7 @@
       "dimension": "Timeliness",
       "scope": "Provided sources and metadata",
       "finding": "Static simulation data; no calendar timestamp column",
-      "limitation": "Download version/terms remain to be recorded; current operational relevance is unvalidated."
+      "limitation": "Current Kaggle metadata recorded in reports/results/source_metadata.json; original download-version match and operational relevance are unvalidated."
     },
     {
       "dimension": "Consistency",
@@ -172,8 +172,8 @@
     "No global non-adjacent duplicate proof",
     "No physical accuracy validation",
     "No explicit timestamps",
-    "P2 definition/unit unconfirmed",
-    "Upstream version and Kaggle redistribution terms unverified",
+    "Cross-subset independence unresolved",
+    "Original download version not independently matched; current Kaggle metadata recorded separately",
     "No trained models or prediction metrics"
   ]
 }

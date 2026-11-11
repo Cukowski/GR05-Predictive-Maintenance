@@ -1,0 +1,27 @@
+{
+  "checked_on": "2026-11-11",
+  "scientific_source": {
+    "url": "https://doi.org/10.3390/data6010005",
+    "dataset_license_as_stated": "CC0 1.0",
+    "P2_definition": "Total pressure at fan inlet",
+    "P2_unit": "psia",
+    "P2_table": 5
+  },
+  "kaggle": {
+    "url": "",
+    "metadata_url": "https://www.kaggle.com/api/v1/datasets/view/bishals098/nasa-cmapss-2-engine-degradation",
+    "dataset_id": 8045322,
+    "ref": "bishals098/nasa-cmapss-2-engine-degradation",
+    "current_version_reported": 1,
+    "last_updated_reported": "2025-08-10T20:47:18.277Z",
+    "license_label_reported": "U.S. Government Works",
+    "local_download_version": "Not independently matched; original download receipt unavailable",
+    "upstream_checksum_comparison": "Not performed; metadata response provided no file checksums"
+  },
+  "limitations": [
+    "Current online version metadata does not prove which version was originally downloaded.",
+    "Paper dataset license and Kaggle license label differ; recorded separately, not equated.",
+    "Local bytes are identified by SHA-256 in the Task 3/4 manifests; no assertion of an upstream checksum match.",
+    "No raw files or third-party course material are published in Git."
+  ]
+}

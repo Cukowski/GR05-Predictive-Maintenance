@@ -1,7 +1,7 @@
 {
-  "version_id": "task4-v1-97719f3fe055",
-  "fingerprint": "97719f3fe055951f6ca51f91a1f33af7ca5cfced6663dfdc4424d07a9e25a890",
-  "created_at": "2026-10-29T10:46:06.486884+01:00",
+  "version_id": "task4-v1-f8ab427897d5",
+  "fingerprint": "f8ab427897d59cbf84def07bef4fe70f82a41444341974ea7c0bcfbcc82abac4",
+  "created_at": "2026-11-11T23:51:15.084021+01:00",
   "config": {
     "schema_version": "task4-v1",
     "files": [
@@ -16,7 +16,8 @@
       18
     ],
     "cross_dataset_grouping": "conservatively_link_equal_unit_ids",
-    "exclude_unconfirmed_sensor": "P2",
+    "excluded_sensor": "P2",
+    "excluded_sensor_reason": "Keep the existing 17-channel preparation representation stable. P2 is now confirmed by journal Table 5; adding it is a separate feature experiment.",
     "rolling_window_flights": 3,
     "numeric_imputation": "training_median_with_missing_indicators",
     "scaling": "training_standard_score_ddof_0",
@@ -47,9 +48,9 @@
     "python": "3.12.3"
   },
   "code": {
-    "src/preprocessing.py": "e6667af8b79ce55d524d725f1508e7bb5705cca87f281bbd89919ae9f0edd4a5",
-    "src/data_understanding.py": "7aa0418f38243b11108b7d55589758120feb75bcde6471867432b75efc139588",
-    "config/preprocessing.json": "b92fa20947442bb4b60d12c2704f205c3bff272879173b9f307c140a027bd764"
+    "src/preprocessing.py": "2e27d6bc12268fc68eb5d6a98f10a47798fb99f98f762225af6efb4580bf3e94",
+    "src/data_understanding.py": "8ac7ec9c80fa7434237c1ac9ffc4d074a12114bf6f180ed936ee2d08c117908d",
+    "config/preprocessing.json": "8940f7ccb8a0a49591fe0295e3c5f7904dab3d4eaf283c3c4f3561bbbaffb7d4"
   },
   "raw_readings": 14159058,
   "processed_flights": 1542,

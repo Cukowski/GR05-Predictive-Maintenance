@@ -16,7 +16,7 @@ PREDICTORS = ('W', 'X_s')
 PARTITIONS = ('dev', 'test')
 
 # Definitions from the supplied 2020 dataset description, Tables 1–4.
-# P2 is absent from that older table: mark its interpretation for confirmation.
+# P2 is absent from that older table; the 2021 journal Table 5 confirms it.
 DEFINITIONS = {
     'alt': ('Altitude', 'ft', 'ratio'),
     'Mach': ('Flight Mach number', 'dimensionless', 'ratio'),
@@ -27,7 +27,7 @@ DEFINITIONS = {
     'T48': ('Total temperature at HPT outlet', '°R (Rankine)', 'ratio'),
     'T50': ('Total temperature at LPT outlet', '°R (Rankine)', 'ratio'),
     'P15': ('Total pressure in bypass duct', 'psia', 'ratio'),
-    'P2': ('Inlet pressure; interpretation/unit require source confirmation', 'not confirmed', 'continuous; confirm'),
+    'P2': ('Total pressure at fan inlet (2021 journal Table 5)', 'psia', 'ratio'),
     'P21': ('Total pressure at fan outlet', 'psia', 'ratio'),
     'P24': ('Total pressure at LPC outlet', 'psia', 'ratio'),
     'Ps30': ('Static pressure at HPC outlet', 'psia', 'ratio'),
@@ -125,7 +125,7 @@ def measurement_scale(name, group):
     elif name == 'TRA':
         scale = 'Interval'
         reason = 'Working classification: control-position scale; source does not justify a physical twice-as-much interpretation.'
-    elif name == 'P2' or name.startswith('Sm'):
+    elif name.startswith('Sm'):
         scale = 'Unconfirmed'
         reason = 'Confirm source definition/zero-point convention before interpreting ratios.'
     elif group == 'T':

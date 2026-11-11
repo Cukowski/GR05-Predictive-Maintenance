@@ -28,3 +28,6 @@ kaggle.json
 # Operating system metadata.
 .DS_Store
 Thumbs.db
+
+# Local execution/runtime state.
+/.cache/

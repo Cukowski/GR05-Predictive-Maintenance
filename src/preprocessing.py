@@ -242,7 +242,7 @@ def prepare_data(root):
     fixed_contract = {
         'schema_version': 'task4-v1', 'prediction_point': 'end_of_completed_flight',
         'cross_dataset_grouping': 'conservatively_link_equal_unit_ids',
-        'exclude_unconfirmed_sensor': 'P2',
+        'excluded_sensor': 'P2',
         'numeric_imputation': 'training_median_with_missing_indicators',
         'scaling': 'training_standard_score_ddof_0', 'categorical_predictors': ['dataset'],
         'outlier_policy': 'retain_finite_values_no_IQR_deletion',

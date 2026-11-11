@@ -46,7 +46,7 @@ class AuditTests(unittest.TestCase):
 
     def test_scales_use_semantics_instead_of_storage_or_uniqueness(self):
         expected={'unit':'Nominal','hs':'Nominal','Fc':'Ordinal','cycle':'Interval',
-                  'RUL':'Ratio','T2':'Ratio','alt':'Interval','P2':'Unconfirmed'}
+                  'RUL':'Ratio','T2':'Ratio','alt':'Interval','P2':'Ratio'}
         for name,scale in expected.items():
             self.assertEqual(measurement_scale(name,'A')['scale'],scale)
         self.assertEqual(measurement_scale('RUL','Y')['variability'],'discrete')
