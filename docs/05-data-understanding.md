@@ -2,7 +2,7 @@
 
 **GR05 · Industrial Analytics · WS 2026/27**<br>
 **Team:** Selçuk Ata Aksoy and Denzel Gregory Pragassa<br>
-**Analysis date:** 2026-10-22<br>
+**Analysis date:** 2026-11-11<br>
 **Status:** Executed descriptive analysis; team interpretation/review pending. No predictive model trained.
 
 ## 1. Purpose and course alignment
@@ -29,14 +29,14 @@ The two actual local HDF5 files are `N-CMAPSS_DS01-005.h5` and `N-CMAPSS_DS02-00
 | N-CMAPSS_DS01-005.h5 | 2,873,351,432 | 3abdcee2a3c8136e8880e5d43ac8cdf12ab9f7f3ab37145f23b24c11335afbed |
 | N-CMAPSS_DS02-006.h5 | 2,450,472,504 | 47971a68b239ecb756833218a95d68ded6eb7e63ee84e86671c8b188de1ca765 |
 
-Combined size is 4.958 GiB. Checksums identify local bytes; no upstream checksum comparison or Kaggle version/license verification has been completed.
+Combined size is 4.958 GiB. Checksums identify local bytes; no upstream checksum comparison has been completed. Current Kaggle metadata (checked 11 November) reports version 1 and the label U.S. Government Works; the paper states dataset CC0 1.0. Original local download-version matching is still unproven. See [recorded source metadata](../reports/results/source_metadata.json).
 
 The two accompanying files under `data/` are source references, not additional measurement datasets:
 
 - `Run_to_Failure_Simulation_Under_Real_Flight_Conditions_Dataset.pdf`: seven-page preprint, 20 April 2020, focused on the DS02 nine-unit scenario. Tables 1–4 describe physical variables; pp. 3–5 discuss trajectories, flight classes, and a 1 Hz sampling rate for that scenario.
 - `N-CMAPSS_Example_data_loading_and_exploration.ipynb`: example credited to Manuel Arias. Used to understand loading and metadata; its full-array concatenation pattern was replaced by read-only chunks. Its long-flight class prose contains a typo; we follow its class table and actual codes.
 
-These are distinct from the 2021 journal article for the wider N-CMAPSS collection ([Arias Chao et al., Data 6(1), 5](https://doi.org/10.3390/data6010005)). The local older paper omits `P2` from its measured-sensor table and lists some virtual variables absent from these files. Our inventory follows actual HDF5 metadata; the `P2` interpretation/unit remains flagged for source confirmation.
+These are distinct from the 2021 journal article for the wider N-CMAPSS collection ([Arias Chao et al., Data 6(1), 5](https://doi.org/10.3390/data6010005)). The local older paper omits `P2` from its measured-sensor table and lists some virtual variables absent from these files. Our inventory follows actual HDF5 metadata; journal Table 5 now confirms `P2` as total pressure at fan inlet in psia; the current feature table reflects that correction.
 
 ## 3. Observational structure and population
 
@@ -79,7 +79,7 @@ The provided development/test engine IDs are disjoint within both files. DS01 us
 
 ## 4. Feature descriptions, scales, and physical meaning
 
-LPC/HPC mean low/high-pressure compressor; HPT/LPT mean low/high-pressure turbine. Rankine (°R) is an absolute temperature scale, psia is absolute pressure, and rpm is revolutions/minute. The lecturer's *Dataset Scales* PPTX, slides 3–4, guides the table below: nominal labels allow equality; ordinal categories add ordering; interval variables support meaningful differences; ratio variables have meaningful zero points. Discrete/continuous variation is recorded separately from measurement scale. RUL is a discrete ratio count; Rankine temperature is continuous ratio. Altitude has a reference datum and is treated as interval; cycle is an interval index, while an aggregated flight count is ratio. The classifications for throttle control position and simulator modifiers are explicit working interpretations; P2 and stall-margin zero conventions remain unconfirmed.
+LPC/HPC mean low/high-pressure compressor; HPT/LPT mean low/high-pressure turbine. Rankine (°R) is an absolute temperature scale, psia is absolute pressure, and rpm is revolutions/minute. The lecturer's *Dataset Scales* PPTX, slides 3–4, guides the table below: nominal labels allow equality; ordinal categories add ordering; interval variables support meaningful differences; ratio variables have meaningful zero points. Discrete/continuous variation is recorded separately from measurement scale. RUL is a discrete ratio count; Rankine temperature is continuous ratio. Altitude has a reference datum and is treated as interval; cycle is an interval index, while an aggregated flight count is ratio. The classifications for throttle control position and simulator modifiers are explicit working interpretations; P2 is confirmed from journal Table 5; stall-margin zero conventions remain unconfirmed.
 
 The supplied *Task 3 - Describe Data - Feature Description Table - Data Types.ipynb* guides our pandas inspection and `feature_description_table.csv` (188 file/partition/feature rows). It includes storage dtype, full non-null counts/ranges, sampled uniqueness, scale, valid operators, null flags, and notes. Domain-specific overrides replace generic guesses based on numeric dtype or high uniqueness; a mostly unique sensor value is not an ID. Notebook copies demonstrate int64 IDs/counts and ordered/unordered categorical types without modifying raw files.
 
@@ -96,7 +96,7 @@ Float64 storage does not make engine IDs continuous measurements. Flight class i
 | X_s | T48 | float64 | Total temperature at HPT outlet | °R (Rankine) | quantitative (metric) | continuous | Ratio | ==, !=, <, <=, >, >=, +, -, *, / | candidate predictor |
 | X_s | T50 | float64 | Total temperature at LPT outlet | °R (Rankine) | quantitative (metric) | continuous | Ratio | ==, !=, <, <=, >, >=, +, -, *, / | candidate predictor |
 | X_s | P15 | float64 | Total pressure in bypass duct | psia | quantitative (metric) | continuous | Ratio | ==, !=, <, <=, >, >=, +, -, *, / | candidate predictor |
-| X_s | P2 | float64 | Inlet pressure; interpretation/unit require source confirmation | not confirmed | quantitative (metric) | continuous | Unconfirmed | Confirm semantics first | candidate predictor |
+| X_s | P2 | float64 | Total pressure at fan inlet (2021 journal Table 5) | psia | quantitative (metric) | continuous | Ratio | ==, !=, <, <=, >, >=, +, -, *, / | candidate predictor |
 | X_s | P21 | float64 | Total pressure at fan outlet | psia | quantitative (metric) | continuous | Ratio | ==, !=, <, <=, >, >=, +, -, *, / | candidate predictor |
 | X_s | P24 | float64 | Total pressure at LPC outlet | psia | quantitative (metric) | continuous | Ratio | ==, !=, <, <=, >, >=, +, -, *, / | candidate predictor |
 | X_s | Ps30 | float64 | Static pressure at HPC outlet | psia | quantitative (metric) | continuous | Ratio | ==, !=, <, <=, >, >=, +, -, *, / | candidate predictor |
@@ -194,11 +194,11 @@ The Pearson heatmap covers 18 candidate predictors plus RUL on the DS01 developm
 
 | Dimension | Coverage | Observed result | Limit |
 | --- | --- | --- | --- |
-| Conformity | Full metadata + all auxiliary codes | Arrays aligned; invalid category codes: 0; invalid IDs/cycles: 0 | P2 definition/unit requires source confirmation; file metadata does not prove physical units. |
+| Conformity | Full metadata + all auxiliary codes | Arrays aligned; invalid category codes: 0; invalid IDs/cycles: 0 | P2 definition/unit confirmed by journal Table 5; metadata alone does not prove physical accuracy. |
 | Completeness | Every numeric cell in both files | NaN: 0; infinity: 0 | Sentinel values and gaps in physical time are not established by NaN checks. |
 | Uniqueness | All adjacent rows + 12,000 evenly spaced rows per partition | Adjacent exact duplicates: 0; sampled exact duplicates: 0 | All non-adjacent duplicates were not exhaustively checked; repeated flight keys are valid. |
 | Accuracy | Full ranges + development-sample IQR screens | 49 dataset-variable pairs have sampled IQR flags; no rows removed | Extreme values are not proven errors; no independent physical ground truth. |
-| Timeliness | Provided sources and metadata | Static simulation data; no calendar timestamp column | Download version/terms remain to be recorded; current operational relevance is unvalidated. |
+| Timeliness | Provided sources and metadata | Static simulation data; no calendar timestamp column | Current Kaggle metadata recorded in reports/results/source_metadata.json; original download-version match and operational relevance are unvalidated. |
 | Consistency | All engine-flight aggregates + full auxiliary scan | Engine overlap: {'DS01': [], 'DS02': []}; cycle/label/health checks flagged: 0 | Both partitions were inspected for understanding; keep test data out of later tuning. |
 
 The complete scan covers **665,475,726 numeric cells**. No NaN or infinite values were detected. No invalid auxiliary codes/indices or within-unit backward cycle transitions were found. These results do not establish physical accuracy, absence of sentinel values, or absence of missing time intervals.
@@ -222,11 +222,11 @@ IQR flags are candidates for investigation, not confirmed errors. Mixed operatin
 
 ## 7. Feasible next decisions
 
-1. Begin preparation with DS01 and candidate W + X_s variables; keep DS02 as a later robustness case. This is a proposed scope, pending team agreement.
-2. Consider end-of-flight predictions with current-flight features; define the prediction point before aggregation and modeling.
+1. Data preparation is now implemented for DS01 + DS02 with conservative engine grouping. DS01-only refitting remains a later sensitivity option; see [Task 4](06-data-preparation.md).
+2. The implemented prediction point is end-of-completed-flight, using current and earlier information only.
 3. Keep unit-grouped development validation and preserve provided test engines. Fit preprocessing on training engines only; document this notebook's test exposure.
 4. Exclude RUL, final engine lifetime, future cycles, health state, and hidden simulator quantities from baseline predictors. IDs are grouping keys, not numeric predictors.
-5. Confirm upstream file/version and redistribution terms, and resolve P2's source definition/unit. Investigate possible shared engine histories before combining subsets.
+5. Current source metadata and P2 definitions are documented; original download-version matching and cross-subset identity remain limited. Task 4 conservatively links shared IDs and quarantines the known unit-10 conflict.
 6. Only after preparation, establish a simple baseline and measure MAE/RMSE in flight cycles, including per-engine errors and optimistic RUL overestimation.
 
 No trained-model performance, economic savings, real-engine failure validation, or aviation suitability is claimed.

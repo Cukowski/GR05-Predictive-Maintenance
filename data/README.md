@@ -14,7 +14,7 @@ data/
 
 The two files at `data/` root are locally supplied reference material from Kaggle. The PDF is a seven-page April 2020 preprint focused on DS02; the example notebook is credited to Manuel Arias. They are not required to execute our notebook and have not been modified. Do not run or commit the supplied example simply to reproduce our analysis.
 
-Acquisition source reported by the team: [Kaggle N-CMAPSS redistribution](https://www.kaggle.com/datasets/bishals098/nasa-cmapss-2-engine-degradation). Download through your own account under the applicable terms; select DS01-005 and DS02-006 and extract them into `data/raw/`. No credentials belong in this repository. Record the download date, dataset version identifier, and redistribution terms when confirmed. An upstream checksum comparison has not been performed.
+Acquisition source reported by the team: [Kaggle N-CMAPSS redistribution](https://www.kaggle.com/datasets/bishals098/nasa-cmapss-2-engine-degradation). Download through your own account under the applicable terms; select DS01-005 and DS02-006 and extract them into `data/raw/`. No credentials belong in this repository. Current public metadata, checked 11 November, reports v1 and label U.S. Government Works; the scientific paper states dataset CC0 1.0. See [source metadata](../reports/results/source_metadata.json). The original local download-version match and upstream checksum comparison remain unproven.
 
 | File | Bytes | Local SHA-256 |
 |---|---|---|

@@ -2,8 +2,8 @@
 
 **GR05 · Industrial Analytics · HFU · WS 2026/27**<br>
 **Team:** Selçuk Ata Aksoy and Denzel Gregory Pragassa<br>
-**Prepared version:** `task4-v1-97719f3fe055`<br>
-**Run:** 2026-10-29T10:46:06.486884+01:00<br>
+**Prepared version:** `task4-v1-f8ab427897d5`<br>
+**Run:** 2026-11-11T23:51:15.084021+01:00<br>
 **Status:** Pipeline executed, modeling inputs exported; team interpretation review pending. No RUL prediction model trained.
 
 ## 1. What this task means
@@ -14,7 +14,7 @@ The supplied `tasks/IBS6 Industrial Analytics Project Tasks V4.0.pdf`, p. 2, dat
 
 | Deliverable | Actual artifact |
 |---|---|
-| Cleaned dataset ready for modeling | `data/processed/task4-v1-97719f3fe055/flights_features.csv`; finite `X_*.csv`, separate `y_*.csv` and matching `rows_*.csv` |
+| Cleaned dataset ready for modeling | `data/processed/task4-v1-f8ab427897d5/flights_features.csv`; finite `X_*.csv`, separate `y_*.csv` and matching `rows_*.csv` |
 | Preprocessing pipeline | `src/preprocessing.py`, `config/preprocessing.json`, CLI `scripts/prepare_data.py`; saved fitted `preprocessor.joblib` in the local version |
 | Feature engineering documentation | This report, executed `notebooks/02-preprocessing.ipynb`, full `feature_catalog.csv` |
 | Versioned raw/processed comparison | Raw SHA-256 identity, code/config/environment fingerprint, immutable local prepared version, artifact checksums, compact comparison/audit evidence |
@@ -35,7 +35,7 @@ For this version we make a prediction **at the end of a completed flight**. Ever
 | Metadata (A) | unit, cycle, flight class | Identify/order/group histories and describe coverage; not predictors here |
 | Source collection | DS01 / DS02 | Categorical context for the combined table, encoded as two source indicators |
 | Simulator-only information | virtual X_v, health modifiers T, health state hs | Excluded from baseline inputs; not assumed available from physical sensors |
-| Unresolved measured channel | P2 | Excluded pending source definition/unit confirmation |
+| Excluded physical channel | P2 | Definition confirmed from journal Table 5; excluded to retain the selected 17-channel representation |
 
 `X` means the inputs a future model may see; `y` means the answer. Unit 10 is a label, not twice unit 5. RUL is a count in flight cycles. Temperatures are absolute Rankine in the source, not Celsius. The distinction between stored numeric dtype and measurement meaning follows the lecturer's scale guide from Task 3.
 
@@ -184,6 +184,10 @@ Maximum absolute fitted numeric training column mean after standardization: **2.
 
 Official references: [scikit-learn common pitfalls](https://scikit-learn.org/stable/common_pitfalls.html), [SimpleImputer](https://scikit-learn.org/stable/modules/generated/sklearn.impute.SimpleImputer.html), [StandardScaler](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html), [OneHotEncoder](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.OneHotEncoder.html).
 
+### Source-definition refresh, 11 November
+
+Journal Table 5 confirms P2 as total pressure at fan inlet, psia. The source dictionary and code/configuration documentation now reflect that fact. Because code/configuration hashes participate in version identity, the refresh creates a new local version. Prior version directories remain intact. The selected 17-channel representation and the 45/50/20 feature counts have not changed. Current source labels are in [the source metadata snapshot](../reports/results/source_metadata.json); the original download-version match remains unverified.
+
 ## 8. Raw vs prepared comparison and versioning
 
 | Stage | Row meaning | Rows | Representation |
@@ -202,7 +206,7 @@ Raw file identity is retained, without rewriting/copying the raw dataset into Gi
 | N-CMAPSS_DS01-005.h5 | 2,873,351,432 | 3abdcee2a3c8136e8880e5d43ac8cdf12ab9f7f3ab37145f23b24c11335afbed |
 | N-CMAPSS_DS02-006.h5 | 2,450,472,504 | 47971a68b239ecb756833218a95d68ded6eb7e63ee84e86671c8b188de1ca765 |
 
-Prepared data is stored locally at **`data/processed/task4-v1-97719f3fe055/`**. The version fingerprint combines raw file hashes, configuration, preprocessing/helper code hashes, Python and relevant package versions. Every output artifact has a recorded checksum; matching versions are verified/reused. Changed code, policy, data or dependency versions produce a new directory. Existing output files are not silently overwritten.
+Prepared data is stored locally at **`data/processed/task4-v1-f8ab427897d5/`**. The version fingerprint combines raw file hashes, configuration, preprocessing/helper code hashes, Python and relevant package versions. Every output artifact has a recorded checksum; matching versions are verified/reused. Changed code, policy, data or dependency versions produce a new directory. Existing output files are not silently overwritten.
 
 `manifest.json` describes this version; it lists artifact hashes but is not self-hashed. It is an integrity record for local reproducibility, not a cryptographic signature or upstream provenance certificate.
 
@@ -254,7 +258,7 @@ Targeted tests cover chunk-boundary aggregation and unit conversions, non-finite
 - Unit-based conservative linking addresses one known risk, but cross-subset independence remains unresolved; it can also over-group unrelated engines.
 - Whole-flight summaries mix phases, lose detailed transient ordering and can retain operating-regime effects. Reading count may encode flight-class/source differences.
 - Dataset indicators can encourage source-specific rules. Compare DS01-only and integrated experiments on development validation rather than assuming pooling helps.
-- Source version and Kaggle redistribution terms still need confirmation; unresolved P2 is excluded, not silently assigned a definition.
+- Current Kaggle source labels are recorded; original local download-version matching remains unproven; P2 is confirmed and remains excluded as a deliberate representation choice.
 - Data is simulated. No operational aviation validation, economic savings, or predictive accuracy is established by successful preprocessing.
 
 Next: review the representation with both team members, then fit and compare transparent baseline models using held-out engine groups and MAE/RMSE in cycles. Include per-engine and macro averages alongside any overall flight-weighted result.

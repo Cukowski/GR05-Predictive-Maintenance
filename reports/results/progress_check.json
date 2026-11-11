@@ -1,0 +1,95 @@
+{
+  "checked_at": "2026-11-11T23:59:37.247243+01:00",
+  "status": "passed",
+  "raw_hashes_checked": true,
+  "local_data_checked": true,
+  "http_checked": true,
+  "checker_sha256": "2cbd6d80d8398e9b65d846a48560fa571ad42a41ffb93794badc1207673a3881",
+  "prepared_version": "task4-v1-f8ab427897d5",
+  "results": [
+    {
+      "check": "Task 1\u20135 required evidence files",
+      "status": "passed",
+      "detail": "17 explicit paths exist"
+    },
+    {
+      "check": "Automated unit tests",
+      "status": "passed",
+      "detail": "9 tests passed: chunk statistics, semantics, causality, split safety, transforms and version integrity"
+    },
+    {
+      "check": "HTML and documentation links",
+      "status": "passed",
+      "detail": "289 local references checked; HTML tags/IDs and image alternatives valid"
+    },
+    {
+      "check": "Executed notebooks",
+      "status": "passed",
+      "detail": "34 code cells; 18 embedded figures; no errors"
+    },
+    {
+      "check": "Task 3 full-scan reconciliation",
+      "status": "passed",
+      "detail": "14,159,058 readings, 1,542 flights, 47 fields; no NaN/inf; P2 source corrected"
+    },
+    {
+      "check": "Task 4 policy and fingerprints",
+      "status": "passed",
+      "detail": "Current code/config matched; conservative groups separate; splits 574/343/543 and 82 quarantine"
+    },
+    {
+      "check": "Local model-ready artifacts",
+      "status": "passed",
+      "detail": "All artifact hashes valid; finite/ordered X,y,rows; train medians verified; matrix transforms reproduced"
+    },
+    {
+      "check": "Raw file identity",
+      "status": "passed",
+      "detail": "Full SHA-256 and sizes match"
+    },
+    {
+      "check": "Task 5 provenance and findings",
+      "status": "passed",
+      "detail": "Tracked source hashes and current Task 4 version match; training insights recalculated; six analysis charts present"
+    },
+    {
+      "check": "Progress/milestone dates and presentation artifacts",
+      "status": "passed",
+      "detail": "12 Nov progress; 19 Nov milestone; 40 slides with notes/attribution, full and short PDFs"
+    },
+    {
+      "check": "Local website HTTP smoke check",
+      "status": "passed",
+      "detail": "Five current pages plus styles/scripts/favicon returned HTTP 200; temporary loopback server closed"
+    }
+  ],
+  "notebooks": [
+    {
+      "file": "01-data-understanding.ipynb",
+      "executed_code_cells": 15,
+      "embedded_charts": 7
+    },
+    {
+      "file": "02-preprocessing.ipynb",
+      "executed_code_cells": 9,
+      "embedded_charts": 3
+    },
+    {
+      "file": "03-descriptive-analysis.ipynb",
+      "executed_code_cells": 10,
+      "embedded_charts": 8
+    }
+  ],
+  "tasks_1_to_5": "technical deliverables available for progress review",
+  "human_actions": [
+    "Confirm working roles and speaking allocation",
+    "Review explanations and rehearse for 19 November",
+    "Preview PPTX in presentation application"
+  ],
+  "limitations": [
+    "Original local download-version match/upstream reference checksum not established",
+    "Cross-subset independence unresolved",
+    "No predictive model trained or operational/business outcomes measured",
+    "Static website source checked locally; external deployment not performed"
+  ]
+}
