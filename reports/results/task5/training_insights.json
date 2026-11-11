@@ -1,0 +1,66 @@
+{
+  "training_flights": 574,
+  "source_histories": 7,
+  "conservative_groups": 6,
+  "rul_mean": 41.83449477351916,
+  "rul_min": 0,
+  "rul_max": 99,
+  "t48_r_min": -0.5396282572725544,
+  "t48_r_max": -0.29910728407182885,
+  "t48_negative_histories": 7,
+  "late_minus_early_T48_K_median": 13.622405911877081,
+  "late_minus_early_T48_K_min": 4.925069953087245,
+  "late_minus_early_T48_K_max": 17.81751078467323,
+  "paired_T48_histories": 7,
+  "delta_nonmissing_counts": {
+    "T48_K_delta_prev": 567,
+    "Nc_rpm_delta_prev": 567,
+    "Wf_kg_s_delta_prev": 567
+  },
+  "delta_rul_correlations": {
+    "T48_K_delta_prev": -0.006124710998681607,
+    "Nc_rpm_delta_prev": 0.020843316652939252,
+    "Wf_kg_s_delta_prev": 0.015409053587857342
+  },
+  "condition_stage_medians": [
+    {
+      "life_stage": "Late",
+      "alt_m_mean": 5075.1620838153,
+      "Mach_mean": 0.5528142416,
+      "TRA_pct_mean": 62.1318605188
+    },
+    {
+      "life_stage": "Middle",
+      "alt_m_mean": 5291.0837431978,
+      "Mach_mean": 0.5664862465,
+      "TRA_pct_mean": 62.5535193719
+    },
+    {
+      "life_stage": "Early",
+      "alt_m_mean": 4202.9702930405,
+      "Mach_mean": 0.5054608695,
+      "TRA_pct_mean": 57.4145599147
+    }
+  ],
+  "sensor_correlation_ranges": {
+    "Nc_rpm_mean": {
+      "min": -0.1530116115781604,
+      "max": 0.19920973079674908
+    },
+    "T48_K_mean": {
+      "min": -0.5396282572725544,
+      "max": -0.29910728407182885
+    },
+    "Wf_kg_s_mean": {
+      "min": -0.3133433345372093,
+      "max": -0.0732980684686368
+    }
+  },
+  "limitations": [
+    "Correlations are descriptive, not causal or hypothesis-test p-values",
+    "Flights within histories are dependent; shared IDs are conservatively linked",
+    "Operating-stage summaries are flight weighted",
+    "RUL stages are retrospective target groups, never prediction inputs",
+    "Validation has already been inspected during branch review; this is not a blinded confirmation"
+  ]
+}

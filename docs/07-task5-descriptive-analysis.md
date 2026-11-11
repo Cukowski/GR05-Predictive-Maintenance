@@ -1,75 +1,151 @@
 # Task 5 — Initial Descriptive Analysis
 
-**Project research question:** How accurately can classical regression models estimate engine Remaining Useful Life (RUL) from sensor data compared with a simple baseline?
+**GR05 · Industrial Analytics · HFU · WS 2026/27**<br>
+**Evidence executed and reviewed:** 11 November 2026<br>
+**Analysis foundation:** Denzel Gregory Pragassa; reproducibility/reporting completion AI-assisted, team review pending.<br>
+**Research question:** How accurately can classical regression models estimate engine RUL from sensor/operating data compared with a simple baseline?
 
-## Data sources and provenance
+## Status and V6 deliverables
 
-This descriptive analysis uses information from **the processed engine-cycle CSV in our GitHub repository** and the **NASA N-CMAPSS engine degradation datasets made available through Kaggle**. These are related stages of the same source-data pipeline, **not two independent datasets pooled together**.
+Task 5's descriptive computation/reporting artifacts have been completed for team presentation review. This does not complete model development or establish predictive accuracy. The supplied Project Tasks V6.0 PDF, p. 2, dated 9 November 2026 (internal header V12.0), asks for descriptive statistics, trends/patterns, hypothesis assessment, grouping and business insights, delivered as findings, report, dashboard, insight summary and storytelling slide.
 
-1. **Original data — Kaggle NASA N-CMAPSS datasets:** The team acquired `N-CMAPSS_DS01-005.h5` (DS01) and `N-CMAPSS_DS02-006.h5` (DS02) through the [Kaggle NASA C-MAPSS 2 engine degradation dataset](https://www.kaggle.com/datasets/bishals098/nasa-cmapss-2-engine-degradation). These HDF5 files contain engine flight profiles, sensor values and RUL labels. The original files are retained locally under `data/raw/` and are deliberately excluded from Git because of their size.
-2. **Processed cycle-level CSV — GitHub:** `reports/results/cycles.csv` was generated during Task 3 from the original DS01 and DS02 HDF5 data. It summarizes measurements for individual engine flight cycles, including flight conditions, sensor readings and RUL.
-3. **Task 5 feature CSV — GitHub:** `reports/results/task5/flights_features_from_cycles.csv` was reconstructed from `reports/results/cycles.csv` and the Task 4 engine-split definitions. It contains flight-level features such as average sensor readings, historical changes, engineered ratios, engine identifiers and train/validation/test split labels.
-4. **Full Task 4 prepared data — local alternative:** `data/processed/<version_id>/flights_features.csv` is created by the full Task 4 pipeline from the HDF5 files. It is excluded from Git and contains more features than the reconstructed Task 5 CSV. The Task 5 notebook currently expects this full local version.
+| Deliverable | Evidence |
+|---|---|
+| Exploratory findings and descriptive statistics | Executed `notebooks/03-descriptive-analysis.ipynb`; CSVs under `reports/results/task5/` |
+| Descriptive analytics report and key insights | This report and `training_insights.json` |
+| Visual summary/dashboard | [analysis.html](../analysis.html); six analysis charts plus two reproducible structural charts |
+| Grouping/segmentation | Retrospective RUL stages and engine-level median comparisons; no clustering claimed |
+| Hypothesis assessment | H1–H4 below, explicitly descriptive rather than formal significance tests |
+| Data storytelling slide | Story slide in the milestone draft under `presentations/milestone/` |
 
-**Data lineage:** Kaggle-hosted N-CMAPSS DS01/DS02 HDF5 → Task 3 processing → `reports/results/cycles.csv` → reconstructed `reports/results/task5/flights_features_from_cycles.csv` → available flight-level descriptive inputs. Separately, the full Task 4 pipeline generates the local `data/processed/` feature set. **The reconstructed CSV is based on Kaggle-originated data, but its construction does not constitute a new download or reprocessing of the raw Kaggle files.**
+## Source lineage and reproducibility
 
-## Current status (5 November 2026)
+Kaggle-acquired N-CMAPSS DS01/DS02 HDF5 → audited Task 3 `reports/results/cycles.csv` → reconstructed Task 5 means/history table. These are stages of one data lineage, not independent sources pooled as new evidence. Reconstruction does not restore raw high-frequency measurements or within-flight variance. The full Task 4 dataset remains a separate explicit input option, `SOURCE='full_task4'`, verified against its local artifact manifest.
 
-The Task 5 branch contains the third notebook, `notebooks/03-descriptive-analysis.ipynb`, and two committed structural SVG figures. The reconstructed flight-feature CSV from the processed cycle-level data is also committed. **The six sensor-specific flight-level charts have not yet been generated and committed from the Task 5 notebook**: its input code still reads the full local Task 4 prepared CSV, which is not tracked on GitHub. Do not report those visualizations as completed until they have been executed and checked against an available source.
+Actual input for this execution: **Task 3 cycle aggregates; reconstructed means and causal history, not full Task 4 variances**. Path `reports/results/task5/flights_features_from_cycles.csv`; SHA-256 `a27eb575d1b7c4cd16dc665308af0970837954435094f11675bc3e863b5e1c99`. Task 3 cycle export SHA-256 `c1da1755ec17a3929039cefa61bc0547c612152b5b0c98323e9f141d38c8c472`. Task 4 split policy version `task4-v1-f8ab427897d5`. The source table has 1,542 rows, but analysis uses **574 training flights only**; the fixed validation table is displayed separately. Test/quarantine rows are not used to develop these sensor findings.
 
-The tracked reconstructed CSV contains **1,542 engine-flight records**: 574 training, 343 validation, 543 test and 82 quarantined test-related flights. The intended hypothesis-building analysis uses the **training partition only**. No regression results, MAE/RMSE estimates or measured maintenance savings are claimed in Task 5.
+Rebuild input with `python scripts/build_task5_inputs.py`, execute the notebook top to bottom, then run `python scripts/build_task5_report.py`. The notebook also regenerates both structural charts from `engines.csv`. Its appendix includes historical test structure for context, not feature selection. The tracked reconstruction was independently compared with the overlapping full Task 4 fields within numerical tolerance.
 
-## Run the analysis
+## Findings and hypothesis assessment
 
-### Integration review — 11 November 2026
+### Training findings recorded before the validation output
+- **H1 — sensor association:** T48–RUL Pearson r is negative in 7/7 training histories, ranging from -0.540 to -0.299. This is exploratory association, not proof of wear causality or validated prediction.
+- **Retrospective grouping:** paired late-minus-early T48 engine medians are higher by a median 13.62 K across 7 histories (range 4.93–17.82 K). Groups use true RUL (0–20, 21–50, >50), so they cannot be deployed as known inputs.
+- **H2 — historical changes:** each difference has 567 observed training values; the first flight in each history has no previous observation. Differences describe short-term changes; added predictive value is untested.
+- **H3 — operating context:** altitude/Mach/throttle vary across flights and groups. Displayed medians document context; they do not establish a causal or adjusted effect. Whole-flight summaries mix phases.
+- **H4 — heterogeneity:** Nc–RUL r ranges from -0.153 to 0.199, including both signs. T48 association also varies in magnitude. A universal sensor threshold is not justified.
 
-The branch was reviewed and merged into local `main` as a **working draft**, not a completed Task 5 submission. All eight notebook code cells ran successfully in an isolated temporary checkout using the hash-verified local Task 4 version. They generated all six planned sensor/flight charts and statistics exports. The statistics independently matched the 574 training flights; training and validation histories remained separate. The reconstructed CSV's 1,542 rows and included fields matched the corresponding full Task 4 features within numerical tolerance. All seven existing project tests passed.
+**Business interpretation:** temperature context and recent history are candidates for later RUL modeling. Overestimating RUL could delay an intervention; underestimating could prompt premature maintenance. We have not demonstrated forecast accuracy, costs, savings, or operational suitability.
 
-The review execution did not replace the committed notebook or add its temporary outputs. To finish the submission:
+**Evidence scope:** 574 flights; 7 dataset-scoped histories but only 6 conservative unit-ID groups. No independent-observation significance tests. These data had already been examined during the integration review; this write-up is not a preregistered or blinded hypothesis test.
 
-- Save and review the executed notebook, six generated charts, and statistics exports in the repository.
-- Replace the final notebook placeholder with numerical findings for H1–H4, exceptions, and a concise maintenance/business interpretation; record training conclusions before the validation check.
-- Add a reproducible build step for the reconstructed feature CSV and the two structural charts, or identify those as externally generated artifacts.
-- Clarify that the operating-condition stage boxplots are flight-weighted; the sensor-stage plots use engine-level medians. Neither establishes causal effects or independent-observation significance.
-- Add the dashboard/slide if required by the latest Task 5 handout. No Task 5 task sheet beyond V4.0 was available locally for this review, so its exact deliverable list was not independently confirmed.
+### H2 numerical detail
 
-The notebook currently requires the full local Task 4 dataset. Its reconstructed alternative needs an explicit input option before it can be used without editing the notebook.
+Previous-flight-difference correlations with RUL are T48_K_delta_prev: -0.006, Nc_rpm_delta_prev: 0.021, Wf_kg_s_delta_prev: 0.015. These small pooled linear associations do not establish an incremental prediction benefit; nonlinear or engine-specific effects are not ruled out. We retain history as a candidate to evaluate on development engines rather than claim it improves forecasting.
 
-### Execution steps
+### H3 operating-condition summaries
 
-1. Check out `task5/descriptive-analysis` and activate the project's Python environment.
-2. For the **full Task 4 feature set**, use the Kaggle-sourced DS01/DS02 HDF5 files in `data/raw/` and run `python scripts/prepare_data.py` as described in [data/README.md](../data/README.md). Confirm that the generated `data/processed/<version_id>/flights_features.csv` matches [the Task 4 manifest](../reports/results/task4/manifest.json).
-3. The **tracked alternative** `reports/results/task5/flights_features_from_cycles.csv` can support descriptive calculations on the fields it includes. Using it with the existing third notebook requires changing the notebook input path or adding a documented fallback; it is not a drop-in replacement for all Task 4 features.
-4. Run `notebooks/03-descriptive-analysis.ipynb` from the repository root once its expected data source is available. Review the resulting SVG figures in `reports/figures/task5/` and CSV statistics in `reports/results/task5/`.
-5. Record numerical findings, caveats, a dashboard or slide and a concise business interpretation **only after checking the executed results**. Clearly identify whether each figure came from the full Task 4 dataset or the reconstructed cycle-level CSV.
+| Historical stage | Median altitude [m] | Median Mach | Median throttle [%] |
+| --- | --- | --- | --- |
+| Late | 5075.2 | 0.553 | 62.13 |
+| Middle | 5291.1 | 0.566 | 62.55 |
+| Early | 4203.0 | 0.505 | 57.41 |
 
-## Visuals
+These are **flight-weighted** medians. They document different operating context across retrospective life stages; they are not an adjusted causal comparison and may reflect source/engine composition. Each stage contains a different set of flights from the same histories.
 
-| Figure | Source | Status |
+### Descriptive validation check
+
+The four validation source histories have T48–RUL correlations from **-0.470 to -0.196**, all negative. Their magnitudes differ, and Wf includes a positive association in DS02:18. This is a fixed exploratory check of the branch's three preselected channels. Validation had already been inspected during integration review; this is not independent preregistered confirmation. No model selection or test evaluation is performed here.
+
+| Validation history | Sensor | Pearson r |
 | --- | --- | --- |
-| `engine_lifetimes.svg` | `reports/results/engines.csv`, derived from Kaggle-originated DS01/DS02 data in Task 3 | Generated and committed |
-| `healthy_cycles.svg` | `reports/results/engines.csv` (Task 3) | Generated and committed |
-| `01_train_rul_histogram.svg` | Training flight features from the Kaggle-originated, processed cycle data or full local Task 4 features | Pending notebook execution |
-| `02_sensor_trajectories.svg` | Same training source | Pending notebook execution |
-| `03_train_correlation_heatmap.svg` | Same training source | Pending notebook execution |
-| `04_life_stage_sensor_boxplots.svg` | Same training source | Pending notebook execution |
-| `05_operating_conditions.svg` | Same training source | Pending notebook execution |
-| `06_previous_flight_changes.svg` | Same training source | Pending notebook execution |
+| DS01:5 | T48_K_mean | -0.470 |
+| DS01:5 | Nc_rpm_mean | 0.159 |
+| DS01:5 | Wf_kg_s_mean | -0.153 |
+| DS01:6 | T48_K_mean | -0.196 |
+| DS01:6 | Nc_rpm_mean | 0.368 |
+| DS01:6 | Wf_kg_s_mean | -0.065 |
+| DS02:18 | T48_K_mean | -0.325 |
+| DS02:18 | Nc_rpm_mean | 0.155 |
+| DS02:18 | Wf_kg_s_mean | 0.032 |
+| DS02:5 | T48_K_mean | -0.422 |
+| DS02:5 | Nc_rpm_mean | 0.127 |
+| DS02:5 | Wf_kg_s_mean | -0.151 |
 
-**Partition safeguards:** The two existing Task 3 engine-summary charts describe the overall dataset structure and may include historical test-partition summaries; they should not be used to choose predictive features. The Task 5 notebook develops sensor hypotheses from training histories and uses validation histories only for pre-specified descriptive checks. Test and quarantine histories must not be used for hypothesis development.
+## Full summary statistics
 
-## Analyses corresponding to the lecturer's Task 5 criteria
+| Variable | Count | Mean | Sample std | Minimum | Maximum |
+| --- | --- | --- | --- | --- | --- |
+| RUL | 574.0 | 41.834 | 25.891 | 0.000 | 99.000 |
+| T48_K_mean | 574.0 | 911.541 | 10.343 | 880.481 | 959.553 |
+| Nc_rpm_mean | 574.0 | 8239.921 | 46.925 | 8120.758 | 8333.998 |
+| Wf_kg_s_mean | 574.0 | 1.156 | 0.128 | 0.900 | 1.377 |
+| alt_m_mean | 574.0 | 4739.441 | 1784.466 | 2245.262 | 8060.019 |
+| Mach_mean | 574.0 | 0.539 | 0.080 | 0.365 | 0.680 |
+| TRA_pct_mean | 574.0 | 60.427 | 7.851 | 48.783 | 76.512 |
 
-- **Descriptive statistics:** distributions of flight-level variables, training-engine counts and historical RUL ranges.
-- **Trends and patterns:** per-engine flight-cycle sensor trajectories, correlations with RUL and previous-flight changes.
-- **Hypotheses:** H1 sensor–RUL association; H2 historical changes; H3 operating-context effects; H4 engine and dataset heterogeneity.
-- **Segmentation:** retrospective RUL groups (0–20, 21–50 and >50 cycles) with engine-level median comparisons. These groups are for analysis only and are **not available as deployment features**.
-- **Business story:** use measured results to identify candidate sensor measurements and explain the implications and limits for predictive maintenance ahead of the later baseline-versus-regression comparison.
+Histories are **not** independent flight samples. Seven source histories map to six conservative unit-ID groups. No standard errors or significance tests treating 574 flights as independent subjects are reported.
 
-## Methodological limitations
+## Visual evidence
 
-The Kaggle-hosted N-CMAPSS data combines real flight-condition profiles with **simulated** engine degradation and sensor responses. Flight observations within the same engine are dependent, and operating conditions can confound relationships with RUL. A whole-flight mean also blends different phases of flight.
+### Training RUL distribution
 
-The processed cycle CSV and its reconstructed feature CSV do **not** preserve all the original high-frequency measurements or every feature generated by the full Task 4 processing pipeline. Conclusions based on these summaries must not be described as findings obtained by re-running the complete Kaggle HDF5 analysis. Correlation is not causation or proof of predictive accuracy or operational aviation suitability. No baseline or regression model is trained in Task 5.
+![Training RUL distribution](../reports/figures/task5/01_train_rul_histogram.svg)
 
-**Sources:** [Kaggle data source](https://www.kaggle.com/datasets/bishals098/nasa-cmapss-2-engine-degradation), [data acquisition and processing](../data/README.md), [Task 3](05-data-understanding.md), [Task 4](06-data-preparation.md), [processed cycle CSV](../reports/results/cycles.csv), [reconstructed Task 5 feature CSV](../reports/results/task5/flights_features_from_cycles.csv), [Task 4 manifest](../reports/results/task4/manifest.json) and [Task 5 notebook](../notebooks/03-descriptive-analysis.ipynb).
+574 flights, 7 source histories, 6 conservative groups. RUL spans 0–99 cycles.
+
+### Sensor trajectories
+
+![Sensor trajectories](../reports/figures/task5/02_sensor_trajectories.svg)
+
+T48 in Kelvin, Nc in rpm, Wf in kg/s. Operating conditions and engine/source differences remain.
+
+### Training correlations
+
+![Training correlations](../reports/figures/task5/03_train_correlation_heatmap.svg)
+
+Descriptive Pearson correlations; repeated flights are dependent. No p-values or causal claims.
+
+### Retrospective RUL-stage comparison
+
+![Retrospective RUL-stage comparison](../reports/figures/task5/04_life_stage_sensor_boxplots.svg)
+
+One median per source history and stage; Late 0–20, Middle 21–50, Early >50. Groups use true RUL, never deployable inputs.
+
+### Operating context
+
+![Operating context](../reports/figures/task5/05_operating_conditions.svg)
+
+Flight-weighted distributions, not engine-median comparisons. Regime variation can confound sensor–RUL associations.
+
+### Previous-flight differences
+
+![Previous-flight differences](../reports/figures/task5/06_previous_flight_changes.svg)
+
+567 nonmissing values per channel; 7 expected first-flight gaps. Added predictive value is untested.
+
+## Business story for the milestone
+
+**Observation:** T48 is higher in the historical late-life group and negatively associated with RUL within each training source history.
+
+**Interpretation:** temperature and operating context deserve investigation as model inputs. Core speed and fuel-flow relationships vary; a single universal threshold is not justified.
+
+**Decision next:** compare a transparent constant baseline with simple regression models, using grouped development validation before final test. A training mean constant is natural for squared-error comparison; a median constant minimizes absolute error. Model scores and savings are still unknown.
+
+**Practical limits:** overoptimistic RUL could defer maintenance, pessimistic RUL could encourage premature work. These are possible decision consequences, not measured costs. A real deployment would require independent validation and domain oversight beyond this semester project.
+
+## Provenance updates and remaining caveats
+
+The 2021 journal paper [Table 5](https://www.mdpi.com/2306-5729/6/1/5) confirms P2 as total pressure at the fan inlet, in psia (checked 11 November). The older local preprint omitted that row. Task 4 still excludes P2 to retain the selected 17-channel representation. Its current code/metadata refresh creates a new hash-identified version without changing the representation or 50-column matrix schema; earlier local versions remain intact.
+
+The paper declares the dataset CC0 1.0. Current Kaggle metadata reports version 1 and the license label U.S. Government Works; see the inventory/source snapshot. The exact original local download-version match is still unproven. Real flight profiles drive simulated degradation and sensor responses. There is no evidence here of operational aviation suitability, real-engine fault prediction, economic savings, or RUL accuracy. Cross-subset independence remains uncertain; conservative grouping and unit-10 quarantine mitigate one known risk without proving all independence.
+
+## Sources and review history
+
+- Supplied Project Tasks V6.0, p. 2; milestone comments handout for presentation form.
+- [Task 3 report](05-data-understanding.md), [Task 4 report](06-data-preparation.md), [data access](../data/README.md), and tracked CSV exports.
+- Arias Chao et al. (2021), [Data 6(1), 5](https://doi.org/10.3390/data6010005); [Kaggle redistribution](https://www.kaggle.com/datasets/bishals098/nasa-cmapss-2-engine-degradation).
+- Denzel's six-commit Task 5 branch was integrated on 11 November as a working draft. That review ran all eight original code cells in an isolated checkout. This subsequent milestone-readiness pass saves execution outputs, numerical interpretation, source options and regeneration steps in the repository.
+- [AI assistance log](ai-use-log.md); human fact-checking and rehearsal pending.
+
+This report/dashboard are generated by `scripts/build_task5_report.py` from notebook exports. The assessment is descriptive; no predictive model is fitted.

@@ -1,0 +1,13 @@
+{
+  "source": "reconstructed",
+  "description": "Task 3 cycle aggregates; reconstructed means and causal history, not full Task 4 variances",
+  "source_path": "reports/results/task5/flights_features_from_cycles.csv",
+  "sha256": "a27eb575d1b7c4cd16dc665308af0970837954435094f11675bc3e863b5e1c99",
+  "task4_version": "task4-v1-f8ab427897d5",
+  "cycle_export_sha256": "c1da1755ec17a3929039cefa61bc0547c612152b5b0c98323e9f141d38c8c472",
+  "split_export_sha256": "fd1883d7ae7a23b01833b4e84ff6d5a7146c1c4acc7741222d1d95da083f3f6e",
+  "row_count": 1542,
+  "training_flights": 574,
+  "analysis_scope": "Training hypotheses; fixed descriptive validation check; no test/quarantine hypothesis development",
+  "independence": "Seven training source histories, six conservative unit-ID groups; cross-subset independence unresolved"
+}
